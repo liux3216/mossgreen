@@ -1,0 +1,67 @@
+.pokedex-page{--teal:#1c665d;--border:#bfcecd;--soft:#f3f7f6;--text:#263837;background:#f5f7f7;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;color:var(--text)}
+.wiki-header{position:sticky;top:0;z-index:5;height:65px;background:#fff;border-bottom:1px solid #d3dedd;display:flex;align-items:center;justify-content:space-between;padding:0 26px;gap:20px}
+.wiki-brand{display:flex;align-items:center;gap:22px;color:#126157;font-weight:750;letter-spacing:1px;text-decoration:none;white-space:nowrap}
+.header-link{font-size:14px;color:#526b68;text-decoration:none}
+.wiki-sidebar{position:fixed;top:65px;bottom:0;left:0;width:220px;padding:26px 20px 20px;overflow:auto;font-size:14px}
+.wiki-sidebar p{font-weight:700;padding:10px 6px;margin:0 0 8px;background:#ffffff70}
+.wiki-sidebar nav{display:flex;flex-direction:column;gap:2px}
+.wiki-sidebar a{display:block;text-decoration:none;padding:9px 14px;color:#334946;border-radius:3px}
+.wiki-sidebar a[aria-current=page]{color:#126caa;font-weight:700;background:#edf4f2}
+.wiki-sidebar a:hover{background:#e2eeeb}
+.pokedex-page .pokedex-main{max-width:1010px;min-height:calc(100vh - 65px);margin:0 0 0 220px;padding:42px 60px 35px;background:white}
+.pokedex-main h1{font-family:"Songti SC","STSong",serif;font-size:30px;font-weight:500;line-height:1.4;padding-bottom:10px;margin:0;border-bottom:1px solid #cbd6d4}
+.breadcrumbs{display:flex;gap:12px;font-size:13px;color:#5a706c;margin:14px 0 26px}
+.breadcrumbs a{color:inherit;text-decoration:none}
+.page-intro{font-size:15px;line-height:1.8;margin:0 0 16px}
+.filter-panel{border:1px solid #b5ceca;border-radius:5px 5px 0 0;background:#f5f9f8;overflow:hidden}
+.catalog-count{background:#dcece7;border-bottom:1px solid #b5ceca;padding:15px 20px;display:flex;gap:14px;align-items:baseline}
+.catalog-count strong{font-size:30px;color:#19685e;font-variant-numeric:tabular-nums}
+.catalog-count span{font-size:13px;color:#57716a}
+.filter-fields{display:flex;gap:14px;align-items:end;padding:18px 20px 16px}
+.filter-fields label{display:flex;flex-direction:column;gap:8px;font-size:13px;font-weight:650}
+.filter-fields .name-filter{flex:1;min-width:120px}
+.filter-fields input,.filter-fields select,.filter-fields button{font:inherit;line-height:1.4}
+.filter-fields input,.filter-fields select{height:40px;border:1px solid #b4cdca;border-radius:3px;background:white;padding:8px 10px;color:#354a47;font-size:14px}
+.filter-fields select{min-width:100px}
+.filter-fields button,.generation-filters button{font:inherit;font-size:14px;line-height:1.5;color:#226e65;background:#fff;border:1px solid #b4cdca;border-radius:3px;cursor:pointer;white-space:nowrap;padding:9px 13px;height:40px}
+.generation-filters{display:flex;flex-wrap:wrap;gap:5px;margin:14px 0}
+.generation-filters button{height:39px;color:#226c9d;padding:8px 11px}
+.generation-filters button[aria-pressed=true]{border-color:#238574;color:#17685d;background:#deece6;font-weight:700}
+.generation-filters button:hover,.filter-fields button:hover{background:#e7f1ed}
+.list-status{font-size:13px;color:#627974;margin:16px 0 26px}
+.generation-section{border:1px solid #b4cdca;border-radius:5px;overflow:hidden;margin:0 0 28px}
+.generation-section h2{display:flex;gap:14px;align-items:baseline;background:#dcece7;padding:12px 16px;margin:0;color:#2d4843;font-size:20px;line-height:1.4}
+.generation-section h2 small{font:12px/1.5 system-ui,sans-serif;font-weight:400;color:#6f8880}
+.pokedex-table-wrap{overflow-x:auto}
+.pokedex-table{width:100%;min-width:760px;border-collapse:collapse;background:#fff;table-layout:fixed;font-size:14px}
+.pokedex-table th,.pokedex-table td{border-right:1px solid #cbd8d5;border-bottom:1px solid #cbd8d5;padding:9px 12px;vertical-align:middle;text-align:left}
+.pokedex-table th:last-child,.pokedex-table td:last-child{border-right:0}
+.pokedex-table tr:last-child td{border-bottom:0}
+.pokedex-table th{font-size:12px;font-weight:700;background:#f0f6f3;color:#273e38;text-align:center;white-space:nowrap}
+.pokedex-table tr:nth-child(even){background:#f4f8f6}
+.pokedex-table tr:hover{background:#eaf3ef}
+.pokedex-table th:nth-child(1){width:56px}
+.pokedex-table th:nth-child(2){width:96px}
+.pokedex-table th:nth-child(3){width:160px}
+.pokedex-table th:nth-child(4){width:148px}
+.pokedex-table th:nth-child(5){width:90px}
+.pokedex-table td:first-child{min-width:0;text-align:center;padding:4px}
+.pokedex-table td:nth-child(2){text-align:center;color:#607571;font-variant-numeric:tabular-nums}
+.pokedex-table td:nth-child(3),.pokedex-table td:nth-child(4){white-space:normal}
+.pokedex-table img{width:32px;height:32px;display:block;margin:auto;image-rendering:pixelated;object-fit:contain}
+.pokedex-table a{color:#126eaa;text-decoration:none}
+.pokedex-table a:hover{text-decoration:underline}
+.pokemon-name{font-weight:700}
+.pokedex-table td small{font-size:11px;color:#7b8b87;margin-top:3px}
+.type-badges{display:flex;flex-wrap:wrap;gap:5px}
+.pokedex-type{display:inline-block;min-width:44px;padding:2px 7px;text-align:center;border-radius:3px;font-size:12px;color:white;background:#668177;white-space:nowrap}
+.pokedex-type[data-type="一般"]{background:#91976c}.pokedex-type[data-type="格斗"]{background:#ab4a36}.pokedex-type[data-type="飞行"]{background:#7b76b6}.pokedex-type[data-type="毒"]{background:#934b9d}.pokedex-type[data-type="地面"]{background:#b59246}.pokedex-type[data-type="岩石"]{background:#9a8e46}.pokedex-type[data-type="虫"]{background:#7e922d}.pokedex-type[data-type="幽灵"]{background:#6b578a}.pokedex-type[data-type="钢"]{background:#7a9197}.pokedex-type[data-type="妖精"]{background:#b96e9b}.pokedex-type[data-type="火"]{background:#b8562a}.pokedex-type[data-type="水"]{background:#437da4}.pokedex-type[data-type="草"]{background:#497f39}.pokedex-type[data-type="电"]{background:#a88d20}.pokedex-type[data-type="超能力"]{background:#b8597d}.pokedex-type[data-type="冰"]{background:#448f91}.pokedex-type[data-type="龙"]{background:#7055ab}.pokedex-type[data-type="恶"]{background:#66564e}
+.location-preview{font-size:12px;line-height:1.7}
+.location-preview a{display:block}
+.location-preview .more-locations{font-weight:650;margin-top:2px}
+.empty-state{padding:26px;border:1px dashed #b4cdca;color:#57716a;text-align:center}
+.list-footer{font-size:12px;color:#6d817b;border-top:1px solid #dce7e2;padding-top:15px}
+@media(min-width:1600px){.pokedex-page .pokedex-main{max-width:1120px}}
+@media(max-width:1050px){.wiki-sidebar{width:180px;padding:20px 10px}.pokedex-page .pokedex-main{margin-left:180px;padding:30px}}
+@media(max-width:760px){.wiki-header{height:56px;padding:0 16px}.wiki-brand{font-size:15px;gap:10px;letter-spacing:0}.header-link{font-size:12px}.wiki-sidebar{position:static;width:auto;padding:6px 12px;background:#f5f8f7;border-bottom:1px solid #d7e2df}.wiki-sidebar p{display:none}.wiki-sidebar nav{flex-direction:row;flex-wrap:wrap;gap:3px}.wiki-sidebar a{padding:7px 9px;font-size:12px}.pokedex-page .pokedex-main{margin:0;padding:24px 16px}.pokedex-main h1{font-size:27px}.page-intro{font-size:14px}.filter-fields{flex-wrap:wrap;padding:14px;gap:10px}.filter-fields .name-filter{flex-basis:100%}.filter-fields label:not(.name-filter){flex:1}.filter-fields select{width:100%}.catalog-count{padding:12px 14px}.catalog-count strong{font-size:26px}.generation-filters button{font-size:12px;padding:7px 9px;height:35px}.generation-section h2{font-size:17px}.generation-section h2 small{font-size:11px}.list-status{margin:12px 0 18px}.pokedex-table-wrap:focus-visible{outline:3px solid #d6a123;outline-offset:-3px}}
+.filter-fields input,.filter-fields select{font-weight:400}
