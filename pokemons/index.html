@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<base href="../">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="青苔 Wiki 宝可梦列表，按名称或编号查找游戏内资料与捕捉地点。">
+<title>宝可梦列表 · 青苔 Wiki</title>
+<link rel="stylesheet" href="pokemon.css">
+<script src="pokemons/list.js" defer></script>
+</head>
+<body>
+<main>
+<nav class="wiki-nav" aria-label="站点导航"><a href="./">青苔 Wiki</a><a href="./">野外遇敌图鉴</a><span aria-current="page">宝可梦列表</span></nav>
+<header class="list-heading"><p class="eyebrow">口袋妖怪青苔 · 简单版</p><h1>宝可梦列表</h1><p class="muted">查看本作的属性、种族值、特性与捕捉地点。</p></header>
+<label class="search-label" for="pokemon-search">搜索宝可梦</label>
+<input id="pokemon-search" class="pokemon-search" type="search" placeholder="输入名字或本作编号，例如溜溜糖球、311" autocomplete="off">
+<p id="list-status" class="muted small" role="status">正在加载宝可梦…</p>
+<div id="pokemon-grid" class="pokemon-grid"></div>
+<p id="list-empty" class="card" hidden>没有找到对应的宝可梦，试试其他名字或编号。</p>
+<footer><p>当前收录野外遇敌图鉴中的宝可梦。同名形态按本作内部编号分别展示。</p></footer>
+</main>
+</body>
+</html>

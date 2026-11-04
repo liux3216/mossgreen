@@ -82,8 +82,13 @@ function render(pokemon) {
 }
 async function load() {
   try {
-    const id = new URLSearchParams(location.search).get('id');
-    if (!id || !/^[1-9]\d*$/.test(id)) throw new Error('请从遇敌图鉴点击宝可梦名字进入资料页。');
+    const legacyId = new URLSearchParams(location.search).get('id');
+    const id = document.body.dataset.pokemonId || legacyId;
+    if (!document.body.dataset.pokemonId && legacyId && /^[1-9]\d*$/.test(legacyId)) {
+      location.replace('pokemons/' + legacyId + '/');
+      return;
+    }
+    if (!id || !/^[1-9]\d*$/.test(id)) throw new Error('请从宝可梦列表或遇敌图鉴点击名字进入资料页。');
     const response = await fetch('data/pokemon.json');
     if (!response.ok) throw new Error('资料暂时加载失败，请刷新重试。');
     const data = await response.json();
