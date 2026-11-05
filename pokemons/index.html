@@ -4,38 +4,36 @@
 <meta charset="utf-8">
 <base href="../">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="青苔 Wiki 宝可梦图鉴，按世代、属性、名称或编号查找游戏内资料与捕捉地点。">
+<meta name="description" content="青苔 Wiki 宝可梦图鉴，按属性、名称或编号查找游戏内资料与捕捉地点。">
 <title>宝可梦图鉴 · 青苔 Wiki</title>
 <link rel="stylesheet" href="pokemon.css">
 <link rel="stylesheet" href="pokemons/list.css">
-<script src="pokemons/list.js" defer></script>
+<script src="pokemons/list.js?v=38e26ca02708" defer></script>
 </head>
 <body class="pokedex-page">
 <header class="wiki-header">
 <a class="wiki-brand" href="./"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 5h7l2 2 2-2h7v15h-7l-2 2-2-2H3zm2 2v11h6V9L9 7zm8 2v9h6V7h-4z"/></svg>宝可梦青苔 百科</a>
-<a class="header-link" href="./">野外遇敌图鉴</a>
 </header>
 <aside class="wiki-sidebar" aria-label="百科导航">
 <p>宝可梦青苔 百科</p>
-<nav><a href="./">首页</a><a href="pokemons/" aria-current="page">宝可梦图鉴</a><a href="./#atlas-nav">地点分布与地图</a></nav>
+<nav><a href="./">首页</a><a href="pokemons/" aria-current="page">宝可梦图鉴</a><a href="moves/">招式一览</a><a href="abilities/">特性一览</a><a href="locations/">地点分布</a><a href="locations/atlas/">查看地图</a></nav>
 </aside>
 <main class="pokedex-main">
 <h1>宝可梦图鉴</h1>
 <nav class="breadcrumbs" aria-label="当前位置"><a href="./">百科首页</a><span>/</span><span aria-current="page">宝可梦图鉴</span></nav>
-<p class="page-intro">按全国图鉴编号排列，包含本作不同形态与特殊条目。点击名称查看属性、种族值、特性与分布。</p>
+<p class="page-intro">按游戏图鉴编号排序，同一编号集中展示；不同形态可展开查看。点击名称查看属性、种族值、特性与分布。</p>
 <section class="filter-panel" aria-label="筛选宝可梦">
-<div class="catalog-count"><strong id="entry-total">—</strong><span>个图鉴条目 · 含不同形态</span></div>
+<div class="catalog-count"><strong id="entry-total">—</strong><span>个精灵条目 · 同编号形态合并展示</span></div>
 <div class="filter-fields">
-<label class="name-filter" for="pokemon-search">查找宝可梦<input id="pokemon-search" type="search" placeholder="名称、全国图鉴编号或本作编号" autocomplete="off"></label>
+<label class="name-filter" for="pokemon-search">查找宝可梦<input id="pokemon-search" type="search" placeholder="名称或编号" autocomplete="off"></label>
 <label for="pokemon-type">属性<select id="pokemon-type"><option value="">全部属性</option></select></label>
 <button id="reset-filters" type="button">重置筛选</button>
 </div>
 </section>
-<nav id="generation-filters" class="generation-filters" aria-label="按世代筛选"></nav>
 <p id="list-status" class="list-status" role="status">正在加载宝可梦…</p>
 <div id="pokemon-grid"></div>
 <p id="list-empty" class="empty-state" hidden>没有找到对应的宝可梦，试试其他名字、编号或筛选条件。</p>
-<footer class="list-footer"><p>资料来自《口袋妖怪青苔》简单版 ROM。全国编号用于世代归类，详情页地址使用本作内部编号。</p><p>目前收录野外遇敌图鉴中的宝可梦。特殊原创形态列在「其他编号」。</p></footer>
+<footer class="list-footer"><p>资料来自《口袋妖怪青苔》简单版 ROM。</p><p>收录本作宝可梦与不同形态。编号使用游戏实际图鉴编号，未分配编号的形态显示为「—」。</p></footer>
 </main>
 </body>
 </html>

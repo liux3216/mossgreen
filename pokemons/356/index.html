@@ -6,30 +6,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="口袋妖怪青苔简单版宝可梦资料，查看游戏内的属性、种族值、特性与野外捕捉地点。">
 <title>顽皮熊猫 · 青苔 Wiki</title>
-<link rel="stylesheet" href="pokemon.css">
-<script src="pokemon.js" defer></script>
+<link rel="stylesheet" href="pokemon.css?v=6f02fcc31d8c">
+<link rel="stylesheet" href="pokemons/list.css?v=b58f6dbcb838">
+<script src="pokemon.js?v=b063d8dbc02e" defer></script>
 </head>
-<body data-pokemon-id="356">
-<main>
-<nav class="wiki-nav" aria-label="站点导航"><a href="./">青苔 Wiki</a><a href="./">野外遇敌图鉴</a><a href="pokemons/">宝可梦列表</a><span aria-current="page">宝可梦资料</span></nav>
+<body class="pokedex-page pokemon-detail-page" data-pokemon-id="356">
+<header class="wiki-header">
+<a class="wiki-brand" href="./"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 5h7l2 2 2-2h7v15h-7l-2 2-2-2H3zm2 2v11h6V9L9 7zm8 2v9h6V7h-4z"/></svg>宝可梦青苔 百科</a>
+</header>
+<aside class="wiki-sidebar" aria-label="百科导航">
+<p>宝可梦青苔 百科</p>
+<nav><a href="./">首页</a><a href="pokemons/" aria-current="location">宝可梦图鉴</a><a href="moves/">招式一览</a><a href="abilities/">特性一览</a><a href="locations/">地点分布</a><a href="locations/atlas/">查看地图</a></nav>
+</aside>
+<main class="pokedex-main">
+<nav class="breadcrumbs" aria-label="当前位置"><a href="./">百科首页</a><span>/</span><a href="pokemons/">宝可梦图鉴</a><span>/</span><span id="breadcrumb-name" aria-current="page">宝可梦资料</span></nav>
 <div id="status" role="status">正在加载宝可梦资料…</div>
 <article id="detail" hidden>
 <header class="hero">
 <div class="portrait"><img id="sprite" alt="" width="160" height="160"></div>
-<div class="identity"><p class="eyebrow">口袋妖怪青苔 · 简单版</p><h1 id="name"></h1><div id="types" class="types"></div><p id="identity-note" class="muted"></p></div>
+<div class="identity"><h1 id="name"></h1><p id="identity-note" class="muted"></p><div id="types" class="types"></div><p id="form-label" class="muted small" hidden></p></div>
 </header>
+<section class="card dex-entry" aria-labelledby="dex-entry-heading"><h2 id="dex-entry-heading">图鉴介绍</h2><p id="dex-entry-text">正在加载图鉴介绍…</p><p id="dex-entry-source" class="muted small"></p></section>
+<section id="form-section" class="card form-section" aria-labelledby="form-heading" hidden><h2 id="form-heading">形态</h2><nav id="form-options" class="form-options" aria-label="切换宝可梦形态"></nav></section>
 <div class="columns">
 <section class="card" aria-labelledby="stats-heading"><h2 id="stats-heading">种族值</h2><div id="stats"></div><p class="total">合计 <strong id="total"></strong></p></section>
 <section class="card" aria-labelledby="info-heading"><h2 id="info-heading">基本资料</h2><dl><dt>属性</dt><dd id="type-text"></dd><dt>特性</dt><dd id="abilities"></dd><dt>捕获率</dt><dd id="catch-rate"></dd></dl><p class="muted small">捕获率为游戏内的基础数值，数值越高通常越容易捕捉。实际成功率还受血量、异常状态和精灵球影响。</p></section>
 </div>
+<section class="card growth-section" aria-labelledby="evolution-heading"><h2 id="evolution-heading">进化</h2><div id="evolution-chain"><p class="muted small">正在加载进化资料…</p></div></section>
+<section class="card growth-section" aria-labelledby="learnset-heading"><h2 id="learnset-heading">升级招式</h2><p id="learnset-note" class="muted small">正在加载升级招式…</p><div class="table-wrap"><table class="learnset-table"><thead><tr><th scope="col">等级</th><th scope="col">招式</th><th scope="col">属性</th><th scope="col">分类</th><th scope="col">威力</th><th scope="col">命中</th><th scope="col">PP</th></tr></thead><tbody id="learnset"></tbody></table></div></section>
 <section class="card encounters" aria-labelledby="encounters-heading">
 <div class="section-top"><div><h2 id="encounters-heading">在哪里捕捉</h2><p id="location-count" class="muted small"></p></div><label class="filter-label">遇敌方式<select id="method"><option value="">全部方式</option></select></label></div>
 <div class="table-wrap"><table><thead><tr><th scope="col">地点</th><th scope="col">方式</th><th scope="col">等级</th><th scope="col">出现比例</th></tr></thead><tbody id="locations"></tbody></table></div>
 <p class="muted small">点击地点可返回对应的地图和完整遇怪表。比例按该方式成功遇敌后的槽位权重计算。这里列出野外随机遇敌记录。</p>
 </section>
-<footer><p>资料来自你提供的《口袋妖怪青苔》简单版 ROM。改版的属性、数值和特性可能与官方游戏不同。</p><a href="./">← 返回野外遇敌图鉴</a></footer>
+
 </article>
-<section id="error" class="card" hidden><h1>暂时找不到这只宝可梦</h1><p id="error-message"></p><a href="./">返回野外遇敌图鉴</a></section>
+<section id="error" class="card" hidden><h1>暂时找不到这只宝可梦</h1><p id="error-message"></p><a href="pokemons/">返回宝可梦图鉴</a></section>
 </main>
 </body>
 </html>

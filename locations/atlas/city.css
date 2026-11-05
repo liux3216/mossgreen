@@ -1,0 +1,29 @@
+.atlas-city-preview{border-top:1px solid #c5d6cc;margin-top:22px;padding-top:18px}
+.atlas-city-preview h2{font-size:17px;margin:0 0 14px}
+.city-layers{border:0;padding:0;margin:0 0 14px;display:flex;gap:9px 14px;flex-wrap:wrap}
+.city-layers legend{font-size:12px;color:#637d6d;margin-bottom:8px}
+.city-layers label{display:flex;align-items:center;gap:5px;font-size:12px;color:#476654;cursor:pointer}
+.city-layers input{width:auto;min-width:0;margin:0;accent-color:#287565}
+.city-layer-dot{width:9px;height:9px;display:inline-block;border-radius:50%}
+.city-layer-dot.gym{background:#b37d13}.city-layer-dot.clown{background:#8e5bb4}.city-layer-dot.center{background:#cd4968}
+.city-map-toolbar{display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.city-map-toolbar button{font:inherit;font-size:12px;background:#fff;color:#426859;border:1px solid #bfd0c5;border-radius:3px;padding:4px 9px;cursor:pointer}
+#city-map-scale{font-size:11px;color:#748b7d;margin-left:auto}
+.city-map-viewport{overflow:auto;max-height:460px;border:1px solid #bfd0c5;border-radius:4px;background:#edf3ed;overscroll-behavior:contain}
+.city-map-stage{position:relative;width:100%}
+.city-map-stage>img{display:block;width:100%;height:auto;image-rendering:pixelated;user-select:none}
+.city-map-markers{position:absolute;inset:0}
+.city-poi{position:absolute;transform:translate(-50%,-50%);border:2px solid white;border-radius:6px;box-shadow:0 1px 4px #173e3166;color:#fff;font:650 11px/1.3 system-ui,sans-serif;padding:3px 5px;min-width:30px;white-space:nowrap;cursor:pointer;z-index:2}
+.city-poi[data-city-kind=gym]{background:#a87716}.city-poi[data-city-kind=clown]{background:#8551aa}.city-poi[data-city-kind=center]{background:#c63c60}
+.city-poi:hover,.city-poi.selected{outline:3px solid #ffe575;z-index:3}
+.city-district{position:absolute;background:#f6fbf2dc;color:#335e43;font-size:11px;padding:1px 5px;border-radius:3px;white-space:nowrap}
+.city-poi-list{display:flex;gap:6px 8px;flex-wrap:wrap;margin-top:12px}
+.city-poi-entry{font:inherit;font-size:11px;background:#fff;padding:4px 7px;border:1px solid #cad9cd;border-radius:3px;color:#467259;cursor:pointer;text-align:left}
+.city-poi-entry[data-city-kind=gym]{border-left:3px solid #b37d13}.city-poi-entry[data-city-kind=clown]{border-left:3px solid #8e5bb4}.city-poi-entry[data-city-kind=center]{border-left:3px solid #cd4968}
+#city-selected-poi,#city-layer-status{font-size:12px;color:#657e6c;line-height:1.8;margin-top:10px}
+.atlas-city-preview [hidden],.atlas-city-preview[hidden]{display:none!important}
+@media(max-width:600px){.city-layers{gap:9px}.city-map-viewport{max-height:400px}.city-poi{font-size:10px;min-width:27px;padding:3px}}
+
+.city-layer-dot.daycare{background:#248aa6}
+.city-poi[data-city-kind=daycare]{background:#167d9a}
+.city-poi-entry[data-city-kind=daycare]{border-left:3px solid #248aa6}

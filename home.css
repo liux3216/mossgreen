@@ -1,0 +1,16 @@
+.home-main .home-subtitle{color:#6b817b;font-size:14px;margin:0 0 26px}
+.home-main section{margin:0 0 28px}
+.home-main h2{font-family:"Songti SC","STSong",serif;font-size:23px;font-weight:500;margin:0 0 12px;color:#29493f}
+.home-main p,.home-main li{font-size:15px;line-height:1.95}
+.home-main section p{margin:0 0 12px}
+.home-main ul{padding-left:22px;margin:0 0 16px}
+.home-main li{margin-bottom:9px}
+.home-links{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.home-links a{display:block;text-decoration:none;border:1px solid #bfcecd;border-radius:4px;padding:18px;background:#f5f9f8;color:#126eaa}
+.home-links a:hover{background:#eaf3ef;border-color:#78a99b}
+.home-links strong{display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px}
+.home-links a>span{font-size:13px;line-height:1.7;display:block;color:#5b756b}
+.home-source{font-size:12px;color:#6d817b;border-top:1px solid #dce7e2;padding-top:18px}
+.home-source a{color:#126eaa;text-decoration:none}
+.home-source a:hover{text-decoration:underline}
+@media(max-width:760px){.home-links{grid-template-columns:1fr}.home-main p,.home-main li{font-size:14px}}

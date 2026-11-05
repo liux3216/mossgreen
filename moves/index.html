@@ -1,0 +1,19 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>招式一览 · 青苔 Wiki</title><meta name="description" content="口袋妖怪青苔的招式列表，按名称、编号、属性与分类查找威力、命中、PP和升级习得的宝可梦。">
+<link rel="stylesheet" href="pokemon.css?v=7786ba3929be"><link rel="stylesheet" href="pokemons/list.css?v=b58f6dbcb838"><link rel="stylesheet" href="moves/list.css?v=96ce1de32be4"><script src="moves/list.js?v=d65cbe14560e" defer></script></head>
+<body class="pokedex-page moves-page"><header class="wiki-header">
+<a class="wiki-brand" href="./"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 5h7l2 2 2-2h7v15h-7l-2 2-2-2H3zm2 2v11h6V9L9 7zm8 2v9h6V7h-4z"/></svg>宝可梦青苔 百科</a>
+</header>
+<aside class="wiki-sidebar" aria-label="百科导航">
+<p>宝可梦青苔 百科</p>
+<nav><a href="./">首页</a><a href="pokemons/">宝可梦图鉴</a><a href="moves/" aria-current="page">招式一览</a><a href="abilities/">特性一览</a><a href="locations/">地点分布</a><a href="locations/atlas/">查看地图</a></nav>
+</aside>
+<main class="pokedex-main"><h1>招式一览</h1>
+<nav class="breadcrumbs" aria-label="当前位置"><a href="./">百科首页</a><span>/</span><span aria-current="page">招式一览</span></nav>
+<p class="page-intro">查看本作招式的属性、分类与基础数值。点击名称展开升级习得的宝可梦，点击表头可排序。</p>
+<section class="filter-panel" aria-label="筛选招式"><div class="catalog-count"><strong id="move-total">—</strong><span>个招式 · 同名记录合并展示</span></div>
+<div class="filter-fields"><label class="name-filter" for="move-search">查找招式<input id="move-search" type="search" placeholder="名称或编号" autocomplete="off"></label>
+<label for="move-type">属性<select id="move-type"><option value="">全部属性</option></select></label><label for="move-category">分类<select id="move-category"><option value="">全部分类</option><option>物理</option><option>特殊</option><option>变化</option></select></label><button id="reset-moves" type="button">重置筛选</button></div></section>
+<p id="moves-status" class="list-status" role="status">正在加载招式…</p><p id="moves-empty" class="empty-state" hidden>没有找到对应招式，试试其他名称或筛选条件。</p>
+<div id="moves-table-wrap" class="moves-table-wrap"><table class="moves-table"><thead><tr><th scope="col" data-sort="id" aria-sort="none"><button type="button">编号<span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" data-sort="name" aria-sort="none"><button type="button">名称<span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" data-sort="type" aria-sort="none"><button type="button">属性<span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" data-sort="category" aria-sort="none"><button type="button">分类<span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" data-sort="power" aria-sort="none"><button type="button">威力<span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" data-sort="accuracy" aria-sort="none"><button type="button">命中<span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" data-sort="pp" aria-sort="none"><button type="button">PP<span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col">升级习得</th></tr></thead><tbody id="move-rows"></tbody></table></div>
+<footer class="list-footer"><p>招式名称、属性、分类与数值取自《口袋妖怪青苔》简单版 ROM。</p><p>升级习得按各形态的升级招式表整理，不包含招式学习机、定点教学或遗传招式。同名记录优先展示有完整数值的招式，升级习得记录合并；原编号仍可用于搜索与跳转。</p></footer></main></body></html>

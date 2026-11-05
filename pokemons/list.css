@@ -6,7 +6,7 @@
 .wiki-sidebar p{font-weight:700;padding:10px 6px;margin:0 0 8px;background:#ffffff70}
 .wiki-sidebar nav{display:flex;flex-direction:column;gap:2px}
 .wiki-sidebar a{display:block;text-decoration:none;padding:9px 14px;color:#334946;border-radius:3px}
-.wiki-sidebar a[aria-current=page]{color:#126caa;font-weight:700;background:#edf4f2}
+.wiki-sidebar a[aria-current]{color:#126caa;font-weight:700;background:#edf4f2}
 .wiki-sidebar a:hover{background:#e2eeeb}
 .pokedex-page .pokedex-main{max-width:1010px;min-height:calc(100vh - 65px);margin:0 0 0 220px;padding:42px 60px 35px;background:white}
 .pokedex-main h1{font-family:"Songti SC","STSong",serif;font-size:30px;font-weight:500;line-height:1.4;padding-bottom:10px;margin:0;border-bottom:1px solid #cbd6d4}
@@ -23,15 +23,15 @@
 .filter-fields input,.filter-fields select,.filter-fields button{font:inherit;line-height:1.4}
 .filter-fields input,.filter-fields select{height:40px;border:1px solid #b4cdca;border-radius:3px;background:white;padding:8px 10px;color:#354a47;font-size:14px}
 .filter-fields select{min-width:100px}
-.filter-fields button,.generation-filters button{font:inherit;font-size:14px;line-height:1.5;color:#226e65;background:#fff;border:1px solid #b4cdca;border-radius:3px;cursor:pointer;white-space:nowrap;padding:9px 13px;height:40px}
-.generation-filters{display:flex;flex-wrap:wrap;gap:5px;margin:14px 0}
-.generation-filters button{height:39px;color:#226c9d;padding:8px 11px}
-.generation-filters button[aria-pressed=true]{border-color:#238574;color:#17685d;background:#deece6;font-weight:700}
-.generation-filters button:hover,.filter-fields button:hover{background:#e7f1ed}
+.filter-fields button{font:inherit;font-size:14px;line-height:1.5;color:#226e65;background:#fff;border:1px solid #b4cdca;border-radius:3px;cursor:pointer;white-space:nowrap;padding:9px 13px;height:40px}
+
+
+
+.filter-fields button:hover{background:#e7f1ed}
 .list-status{font-size:13px;color:#627974;margin:16px 0 26px}
-.generation-section{border:1px solid #b4cdca;border-radius:5px;overflow:hidden;margin:0 0 28px}
-.generation-section h2{display:flex;gap:14px;align-items:baseline;background:#dcece7;padding:12px 16px;margin:0;color:#2d4843;font-size:20px;line-height:1.4}
-.generation-section h2 small{font:12px/1.5 system-ui,sans-serif;font-weight:400;color:#6f8880}
+
+
+
 .pokedex-table-wrap{overflow-x:auto}
 .pokedex-table{width:100%;min-width:760px;border-collapse:collapse;background:#fff;table-layout:fixed;font-size:14px}
 .pokedex-table th,.pokedex-table td{border-right:1px solid #cbd8d5;border-bottom:1px solid #cbd8d5;padding:9px 12px;vertical-align:middle;text-align:left}
@@ -63,5 +63,14 @@
 .list-footer{font-size:12px;color:#6d817b;border-top:1px solid #dce7e2;padding-top:15px}
 @media(min-width:1600px){.pokedex-page .pokedex-main{max-width:1120px}}
 @media(max-width:1050px){.wiki-sidebar{width:180px;padding:20px 10px}.pokedex-page .pokedex-main{margin-left:180px;padding:30px}}
-@media(max-width:760px){.wiki-header{height:56px;padding:0 16px}.wiki-brand{font-size:15px;gap:10px;letter-spacing:0}.header-link{font-size:12px}.wiki-sidebar{position:static;width:auto;padding:6px 12px;background:#f5f8f7;border-bottom:1px solid #d7e2df}.wiki-sidebar p{display:none}.wiki-sidebar nav{flex-direction:row;flex-wrap:wrap;gap:3px}.wiki-sidebar a{padding:7px 9px;font-size:12px}.pokedex-page .pokedex-main{margin:0;padding:24px 16px}.pokedex-main h1{font-size:27px}.page-intro{font-size:14px}.filter-fields{flex-wrap:wrap;padding:14px;gap:10px}.filter-fields .name-filter{flex-basis:100%}.filter-fields label:not(.name-filter){flex:1}.filter-fields select{width:100%}.catalog-count{padding:12px 14px}.catalog-count strong{font-size:26px}.generation-filters button{font-size:12px;padding:7px 9px;height:35px}.generation-section h2{font-size:17px}.generation-section h2 small{font-size:11px}.list-status{margin:12px 0 18px}.pokedex-table-wrap:focus-visible{outline:3px solid #d6a123;outline-offset:-3px}}
+@media(max-width:760px){.wiki-header{height:56px;padding:0 16px}.wiki-brand{font-size:15px;gap:10px;letter-spacing:0}.header-link{font-size:12px}.wiki-sidebar{position:static;width:auto;padding:6px 12px;background:#f5f8f7;border-bottom:1px solid #d7e2df}.wiki-sidebar p{display:none}.wiki-sidebar nav{flex-direction:row;flex-wrap:wrap;gap:3px}.wiki-sidebar a{padding:7px 9px;font-size:12px}.pokedex-page .pokedex-main{margin:0;padding:24px 16px}.pokedex-main h1{font-size:27px}.page-intro{font-size:14px}.filter-fields{flex-wrap:wrap;padding:14px;gap:10px}.filter-fields .name-filter{flex-basis:100%}.filter-fields label:not(.name-filter){flex:1}.filter-fields select{width:100%}.catalog-count{padding:12px 14px}.catalog-count strong{font-size:26px}.list-status{margin:12px 0 18px}.pokedex-table-wrap:focus-visible{outline:3px solid #d6a123;outline-offset:-3px}}
 .filter-fields input,.filter-fields select{font-weight:400}
+
+#pokemon-grid{border:1px solid #b4cdca;border-radius:5px;overflow:hidden;margin-bottom:28px}
+
+.pokemon-detail-page .identity h1{font-size:36px;line-height:1.25;padding:0;margin:0 0 4px;border:0}
+.pokemon-detail-page .hero{margin-top:0}
+.pokemon-detail-page .card{border-radius:5px}
+@media(max-width:760px){.pokemon-detail-page .identity h1{font-size:28px}}
+
+.catalog-forms{margin-top:4px;font-size:12px;color:#627974}.catalog-forms summary{cursor:pointer}.catalog-forms a{display:block;margin-top:4px}

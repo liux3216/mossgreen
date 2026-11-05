@@ -1,0 +1,27 @@
+.moves-table-wrap{border:1px solid #b4cdca;border-radius:5px;overflow-x:auto;margin-bottom:28px}
+.moves-table{width:100%;min-width:790px;border-collapse:collapse;font-size:13px;table-layout:fixed}
+.moves-table th,.moves-table td{padding:10px 12px;border-right:1px solid #cbd8d5;border-bottom:1px solid #cbd8d5;vertical-align:middle}
+.moves-table th:last-child,.moves-table td:last-child{border-right:0}
+.moves-table th{background:#dcece7;color:#273e38;font-size:12px;font-weight:650;text-align:left}
+.moves-table th button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;padding:0;text-align:left;width:100%;display:flex;align-items:center;justify-content:space-between;gap:5px}
+.sort-indicator{color:#82998e;font-weight:400;font-size:12px}
+.moves-table th[aria-sort]:not([aria-sort=none]) .sort-indicator{color:#126eaa}
+.moves-table th:nth-child(1){width:64px}.moves-table th:nth-child(2){width:145px}.moves-table th:nth-child(3){width:75px}.moves-table th:nth-child(4){width:70px}.moves-table th:nth-child(5),.moves-table th:nth-child(6){width:62px}.moves-table th:nth-child(7){width:52px}
+.moves-table td:first-child{min-width:0;font-variant-numeric:tabular-nums;color:#688174;text-align:center}
+.moves-table td:nth-child(5),.moves-table td:nth-child(6),.moves-table td:nth-child(7){font-variant-numeric:tabular-nums;text-align:center}
+.moves-table .move-row:nth-of-type(4n+3){background:#f4f8f6}.moves-table .move-row:hover{background:#edf5f1}
+.move-name{font:inherit;font-weight:650;color:#126eaa;border:0;background:none;padding:0;cursor:pointer;text-align:left}
+.move-name:hover{text-decoration:underline}.move-name[aria-expanded=true]{color:#245643}
+.learners-preview{font-size:11px;line-height:1.7;color:#6a8075}.learners-preview a{color:#126eaa;text-decoration:none}.learners-preview a:hover{text-decoration:underline}
+.learners-preview button{font:inherit;display:block;padding:0;background:none;border:0;color:#126eaa;cursor:pointer;font-weight:600;text-align:left}
+.move-details td{background:#f4f9f6;padding:16px 20px!important;text-align:left!important;white-space:normal!important}
+.move-details h2{font-size:15px;margin:0 0 10px}.move-details p{font-size:13px;color:#647d6e;line-height:1.8}
+.learners-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 16px}
+.learners-grid a{display:flex;flex-direction:column;color:#126eaa;font-size:12px;text-decoration:none;line-height:1.7}
+.learners-grid a:hover{text-decoration:underline}.learners-grid small{color:#718579;font-size:11px}
+.moves-page .move-category{font-size:11px;border-radius:3px;padding:2px 7px;white-space:nowrap;background:#edf2ef;color:#63756d}
+.moves-page .move-category[data-category="物理"]{background:#f5e3dd;color:#9b4837}.moves-page .move-category[data-category="特殊"]{background:#e1eaf5;color:#456a99}.moves-page .move-category[data-category="变化"]{background:#eee5f3;color:#7b5b91}
+.move-row{scroll-margin-top:82px}.move-row:target td{background:#fff8df}
+.moves-page .filter-fields select{min-width:85px}.moves-page .filter-fields{gap:10px}.moves-page .filter-fields input{min-width:0;width:100%}
+.moves-page .empty-state[hidden],.moves-page .moves-table-wrap[hidden],.move-details[hidden]{display:none!important}
+@media(max-width:760px){.learners-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.moves-page .filter-fields label:not(.name-filter){flex:1}.moves-page .filter-fields select{width:100%}.moves-page .catalog-count{gap:10px}.moves-page .catalog-count span{font-size:12px}}

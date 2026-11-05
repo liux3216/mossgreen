@@ -1,0 +1,19 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>特性一览 · 青苔 Wiki</title><meta name="description" content="口袋妖怪青苔的特性列表，查找特性说明、拥有该特性的宝可梦及其野外分布。">
+<link rel="stylesheet" href="pokemon.css?v=7786ba3929be"><link rel="stylesheet" href="pokemons/list.css?v=b58f6dbcb838"><link rel="stylesheet" href="abilities/list.css?v=cd1a7f94ac7e"><script src="abilities/list.js?v=edf8c22f0192" defer></script></head>
+<body class="pokedex-page abilities-page"><header class="wiki-header">
+<a class="wiki-brand" href="./"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 5h7l2 2 2-2h7v15h-7l-2 2-2-2H3zm2 2v11h6V9L9 7zm8 2v9h6V7h-4z"/></svg>宝可梦青苔 百科</a>
+</header>
+<aside class="wiki-sidebar" aria-label="百科导航">
+<p>宝可梦青苔 百科</p>
+<nav><a href="./">首页</a><a href="pokemons/">宝可梦图鉴</a><a href="moves/">招式一览</a><a href="abilities/" aria-current="page">特性一览</a><a href="locations/">地点分布</a><a href="locations/atlas/">查看地图</a></nav>
+</aside>
+<main class="pokedex-main"><h1>特性一览</h1>
+<nav class="breadcrumbs" aria-label="当前位置"><a href="./">百科首页</a><span>/</span><span aria-current="page">特性一览</span></nav>
+<p class="page-intro">查看本作特性的效果说明。点击名称展开拥有该特性的宝可梦及其野外分布，点击表头可排序。</p>
+<section class="filter-panel" aria-label="筛选特性"><div class="catalog-count"><strong id="ability-total">—</strong><span>个特性 · 按游戏特性编号排列</span></div>
+<div class="filter-fields"><label class="name-filter" for="ability-search">查找特性<input id="ability-search" type="search" placeholder="名称、编号、说明或宝可梦" autocomplete="off"></label>
+<label for="ability-availability">野外分布<select id="ability-availability"><option value="">全部特性</option><option value="wild">有野外分布</option><option value="none">暂无野外分布</option></select></label><button id="reset-abilities" type="button">重置筛选</button></div></section>
+<p id="abilities-status" class="list-status" role="status">正在加载特性…</p><p id="abilities-empty" class="empty-state" hidden>没有找到对应特性，试试其他名称或筛选条件。</p>
+<div id="abilities-table-wrap" class="abilities-table-wrap"><table class="abilities-table"><thead><tr><th scope="col" data-sort="id" aria-sort="none"><button type="button">编号<span class="ability-sort" aria-hidden="true">↕</span></button></th><th scope="col" data-sort="name" aria-sort="none"><button type="button">名称<span class="ability-sort" aria-hidden="true">↕</span></button></th><th scope="col" data-sort="description" aria-sort="none"><button type="button">描述<span class="ability-sort" aria-hidden="true">↕</span></button></th><th scope="col">关联宝可梦与地点</th></tr></thead><tbody id="ability-rows"></tbody></table></div>
+<footer class="list-footer"><p>特性名称与简述取自《口袋妖怪青苔》简单版 ROM，关联宝可梦按各形态的特性表整理。</p><p>野外分布来自这些宝可梦的随机遇敌记录，不代表每次遇到的宝可梦都拥有该特性。</p></footer></main></body></html>

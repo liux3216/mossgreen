@@ -51,3 +51,53 @@ footer{font-size:13px;color:var(--muted);margin:22px 0}
 [hidden]{display:none!important}
 @media(max-width:600px){main{padding:16px 12px}.wiki-nav{gap:12px;margin-bottom:20px}.hero{gap:18px}.portrait{width:116px;height:116px;border-radius:12px}.portrait img{width:112px;height:112px}.columns{grid-template-columns:1fr}.card{padding:18px 14px}.section-top{flex-direction:column;gap:10px}th,td{padding:10px 7px;font-size:13px}.identity-note{font-size:12px}}
 .list-heading{margin:12px 0 24px}.list-heading h1{margin-bottom:10px}.search-label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}.pokemon-search{font:inherit;width:100%;padding:12px 14px;border:1px solid #a7bcb0;border-radius:8px;background:white;color:var(--text)}.pokemon-search:focus-visible{outline:3px solid #d6a123;outline-offset:2px}.pokemon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:18px}.pokemon-card{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:12px;background:white;text-decoration:none;transition:border-color .15s,background .15s}.pokemon-card:hover{background:#eaf3e9;border-color:#7ca78b}.pokemon-card img{image-rendering:pixelated;object-fit:contain;flex:none}.pokemon-card div{min-width:0;display:flex;flex-direction:column;gap:3px}.pokemon-card strong{font-size:17px;overflow-wrap:anywhere}.pokemon-card small,.pokemon-card span{color:var(--muted);font-size:12px}@media(max-width:600px){.pokemon-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.pokemon-card{flex-direction:column;align-items:start;gap:6px;padding:12px}.pokemon-card img{align-self:center}.pokemon-card strong{font-size:16px}}
+
+.fill[data-stat="hp"]{background:#dc6262}
+.fill[data-stat="attack"]{background:#dc963e}
+.fill[data-stat="defense"]{background:#c7ad38}
+.fill[data-stat="specialAttack"]{background:#5b91cc}
+.fill[data-stat="specialDefense"]{background:#65a56e}
+.fill[data-stat="speed"]{background:#b875b2}
+
+.identity h1{margin-bottom:4px}
+#identity-note{margin:0 0 12px}
+
+.form-section{margin-bottom:18px}
+.form-options{display:flex;flex-wrap:wrap;gap:10px}
+.form-option{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid #c5d6cc;border-radius:5px;background:#f7faf7;text-decoration:none;min-width:180px}
+.form-option:hover{border-color:#699c84;background:#edf6ef}
+.form-option[aria-current=page]{border:2px solid #245643;padding:7px 11px;background:#e2eee6}
+.form-option img{object-fit:contain;image-rendering:pixelated;flex:none}
+.form-option span{display:flex;flex-direction:column;gap:3px}
+.form-option strong{font-size:14px}
+.form-option small{font-size:12px;color:#486056}
+#form-label{margin:8px 0 0}
+@media(max-width:600px){.form-option{width:100%;min-width:0}}
+
+.growth-section{margin-bottom:18px}
+#evolution-chain{overflow-x:auto}
+.evolution-path{display:flex;align-items:center;gap:12px;padding:8px 0;min-width:max-content}
+.evolution-path+.evolution-path{border-top:1px solid var(--line);margin-top:12px;padding-top:20px}
+.evolution-pokemon{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:116px;min-height:134px;border:1px solid #cfddd5;border-radius:5px;background:#f7faf8;padding:10px;text-decoration:none;flex:none}
+.evolution-pokemon[aria-current=page]{border-color:#2f8070;background:#e7f2ec}
+.evolution-pokemon:hover{border-color:#2f8070;background:#edf5f0}
+.evolution-pokemon img{image-rendering:pixelated;object-fit:contain}
+.evolution-pokemon strong{font-size:13px;color:#126eaa}
+.evolution-pokemon small{font-size:12px;color:#6a8075}
+.evolution-condition{display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center;width:105px;flex:none;color:#577569;line-height:1.6}
+.evolution-condition small{font-size:12px;overflow-wrap:anywhere}
+.evolution-condition>span{font-size:25px}
+.learnset-table{min-width:550px;font-size:13px;margin-top:14px;border:1px solid #cbd8d5}
+.learnset-table th,.learnset-table td{padding:10px 12px;border-right:1px solid #cbd8d5;vertical-align:middle}
+.learnset-table th{background:#dcece7;color:#2d5145;font-size:12px}
+.learnset-table td:first-child{min-width:0;text-align:center;width:55px;font-variant-numeric:tabular-nums}
+.learnset-table td:nth-child(2){font-weight:600;color:#2b5144;min-width:115px}
+.learnset-table tr:nth-child(even){background:#f4f8f6}
+.learnset-table .pokedex-type{font-size:11px}
+.move-category{font-size:11px;border-radius:3px;padding:2px 7px;white-space:nowrap;background:#edf2ef;color:#63756d}
+.move-category[data-category="物理"]{background:#f5e3dd;color:#9b4837}
+.move-category[data-category="特殊"]{background:#e1eaf5;color:#456a99}
+.move-category[data-category="变化"]{background:#eee5f3;color:#7b5b91}
+@media(max-width:600px){.evolution-path{gap:8px}.evolution-pokemon{width:100px;padding:8px}.evolution-condition{width:88px}.learnset-table th,.learnset-table td{padding:9px 10px}}
+
+.dex-entry{margin-bottom:18px}.dex-entry #dex-entry-text{font-size:15px;line-height:1.9;margin:10px 0 12px}.dex-entry #dex-entry-source{margin-bottom:0}

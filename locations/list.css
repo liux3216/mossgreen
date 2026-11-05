@@ -1,0 +1,17 @@
+.locations-table-wrap{border:1px solid #b4cdca;border-radius:5px;overflow-x:auto;margin-bottom:28px}
+.locations-table{width:100%;min-width:630px;border-collapse:collapse;font-size:13px;table-layout:fixed}
+.locations-table th,.locations-table td{padding:12px;border-right:1px solid #cbd8d5;border-bottom:1px solid #cbd8d5;vertical-align:middle}
+.locations-table th:last-child,.locations-table td:last-child{border-right:0}
+.locations-table tr:last-child td{border-bottom:0}
+.locations-table th{font-size:12px;font-weight:650;text-align:left;color:#273e38;background:#dcece7}
+.locations-table th:first-child{width:48%}.locations-table th:last-child{width:92px}
+.locations-table td:first-child{min-width:0}.locations-table td:nth-child(3){text-align:center;font-variant-numeric:tabular-nums;white-space:normal}
+.locations-table tr:nth-child(even){background:#f4f8f6}.locations-table tbody tr:hover{background:#eaf3ef}
+.locations-table a{font-weight:600;color:#126eaa;text-decoration:none}.locations-table a:hover{text-decoration:underline}
+.locations-table .location-id{display:inline;font-size:11px;color:#7a8e83;margin-left:8px;font-weight:400;white-space:nowrap}
+.locations-table .location-methods{display:flex;flex-wrap:wrap;gap:4px 9px;color:#587264;font-size:12px}
+.locations-table th button{font:inherit;color:inherit;border:0;background:none;padding:0;width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;text-align:left;white-space:nowrap}
+.locations-sort{color:#82998e;font-weight:400}.locations-table th[aria-sort]:not([aria-sort=none]) .locations-sort{color:#126eaa}
+.locations-page .directory-tools{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px;font-size:14px}.directory-tools a{color:#126eaa;text-decoration:none}.directory-tools a:hover{text-decoration:underline}.directory-tools span{color:#8a9d97}
+.locations-page .filter-fields input{width:100%;min-width:0}.locations-page .empty-state[hidden],.locations-page .locations-table-wrap[hidden]{display:none!important}
+@media(max-width:760px){.locations-page .filter-fields label:not(.name-filter){flex:1}.locations-page .filter-fields select{width:100%}.locations-page .catalog-count{gap:10px}.locations-page .catalog-count span{font-size:12px}}

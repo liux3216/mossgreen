@@ -1,0 +1,23 @@
+.location-detail-page h1{overflow-wrap:anywhere}
+.location-detail-page .breadcrumbs{flex-wrap:wrap;row-gap:5px}
+.location-maps{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0 28px}
+.location-map-card{min-width:0;border:1px solid #cbd8d5;border-radius:5px;padding:18px;text-align:center;background:#f7faf8}
+.location-map-card h2{font-size:15px;text-align:left;margin:0 0 16px}
+.location-map-card .map-preview{display:inline-block;width:min(100%,320px);max-width:100%;border-radius:4px;margin:0}
+.location-map-card p{font-size:12px;color:#718579;text-align:left;margin-top:12px}
+.related-section{margin:20px 0 28px}.related-section h2{font-size:16px;margin-bottom:10px}
+#related-locations{display:flex;flex-wrap:wrap;gap:8px}#related-locations a{padding:5px 10px;border:1px solid #cbd8d5;border-radius:3px;font-size:13px;text-decoration:none;color:#126eaa;background:#f5f9f7}
+.location-encounters>h2{font-size:22px;margin:0 0 16px}
+.location-filters{padding:16px!important;border:1px solid #cbd8d5;background:#f5f9f8;border-radius:5px;margin-bottom:24px}
+.location-filters input{width:100%;min-width:0}
+.encounter-method{margin-bottom:24px}.encounter-method h3{font-size:15px;font-weight:650;margin:0 0 10px;color:#3f6957}
+.location-table-wrap{border:1px solid #bfd2c6;border-radius:4px;overflow-x:auto}
+.location-encounter-table{font-size:13px;min-width:540px}
+.location-encounter-table th{background:#dcece7;color:#2d5145;font-size:12px}
+.location-encounter-table th,.location-encounter-table td{border-right:1px solid #cbd8d5;padding:10px 12px;vertical-align:middle}
+.location-encounter-table th:last-child,.location-encounter-table td:last-child{border-right:0}
+.location-encounter-table tr:last-child td{border-bottom:0}.location-encounter-table tr:nth-child(even){background:#f4f8f6}
+.encounter-identity{display:flex;align-items:center;gap:10px}.encounter-identity img{image-rendering:pixelated;object-fit:contain;flex:none}.encounter-identity a{font-weight:600;color:#126eaa;text-decoration:none}.encounter-identity a:hover{text-decoration:underline}
+.location-encounter-table .pokedex-type{font-size:11px;margin:2px 4px 2px 0}
+.location-detail-page .map-dialog input{min-width:0;width:auto;flex:none}
+@media(max-width:600px){.location-maps{grid-template-columns:1fr}.location-map-card{padding:16px}.location-map-card .map-preview{width:min(100%,280px)}.location-filters{flex-wrap:wrap}.location-filters .name-filter{flex-basis:100%}.location-detail-page .map-dialog{padding:12px}}

@@ -1,0 +1,20 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>地点分布 · 青苔 Wiki</title><meta name="description" content="口袋妖怪青苔的地点目录，按地点与遇敌方式查找野生宝可梦，点击地点查看地图和完整分布。">
+<link rel="stylesheet" href="pokemon.css?v=7786ba3929be"><link rel="stylesheet" href="pokemons/list.css?v=b58f6dbcb838"><link rel="stylesheet" href="locations/list.css?v=253384841750"><script src="locations/list.js?v=0a85c9e7a736" defer></script></head>
+<body class="pokedex-page locations-page"><header class="wiki-header">
+<a class="wiki-brand" href="./"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 5h7l2 2 2-2h7v15h-7l-2 2-2-2H3zm2 2v11h6V9L9 7zm8 2v9h6V7h-4z"/></svg>宝可梦青苔 百科</a>
+</header>
+<aside class="wiki-sidebar" aria-label="百科导航">
+<p>宝可梦青苔 百科</p>
+<nav><a href="./">首页</a><a href="pokemons/">宝可梦图鉴</a><a href="moves/">招式一览</a><a href="abilities/">特性一览</a><a href="locations/" aria-current="page">地点分布</a><a href="locations/atlas/">查看地图</a></nav>
+</aside>
+<main class="pokedex-main"><h1>地点与野生分布</h1>
+<nav class="breadcrumbs" aria-label="当前位置"><a href="./">百科首页</a><span>/</span><span aria-current="page">地点分布</span></nav>
+<p class="page-intro">按地点查找野生宝可梦与遇敌方式。点击地点名称，查看对应地图、出现等级和完整遇敌表。</p>
+
+<section class="filter-panel" aria-label="筛选地点"><div class="catalog-count"><strong id="location-total">—</strong><span>个地点 · 同一地点汇总遇敌方式</span></div>
+<div class="filter-fields"><label class="name-filter" for="location-search">查找地点<input id="location-search" type="search" placeholder="地点、地图编号或宝可梦" autocomplete="off"></label>
+<label for="location-method">遇敌方式<select id="location-method"><option value="">全部方式</option></select></label><button id="reset-locations" type="button">重置筛选</button></div></section>
+<p id="locations-status" class="list-status" role="status">正在加载地点…</p><p id="locations-empty" class="empty-state" hidden>没有找到对应地点，试试其他名称或遇敌方式。</p>
+<div id="locations-table-wrap" class="locations-table-wrap"><table class="locations-table"><thead><tr><th scope="col" data-sort="name" aria-sort="none"><button type="button">地点<span class="locations-sort" aria-hidden="true">↕</span></button></th><th scope="col">遭遇方式</th><th scope="col" data-sort="count" aria-sort="none"><button type="button">宝可梦数<span class="locations-sort" aria-hidden="true">↕</span></button></th></tr></thead><tbody id="location-rows"></tbody></table></div>
+<footer class="list-footer"><p>目录根据现有野外随机遇敌表整理；宝可梦数为该地点各方式记录中不同内部编号的数量。</p><p>同名地图的分区、楼层与配置分别保留。不含定点战、剧情赠送、化石或交换。</p></footer></main></body></html>
