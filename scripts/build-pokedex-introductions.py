@@ -13,6 +13,7 @@ for row in csv.DictReader((cache/'pokemon_species_names.csv').open()):
   names[row['name']]=int(row['pokemon_species_id'])
   if row['local_language_id']=='12':species_names[int(row['pokemon_species_id'])]=row['name']
 versions={int(r['version_id']):r['name'] for r in csv.DictReader((cache/'version_names.csv').open()) if r['local_language_id']=='12'}
+intro_digits=str.maketrans('０１２３４５６７８９','0123456789')
 texts={};scores={}
 for row in csv.DictReader((cache/'pokemon_species_flavor_text.csv').open()):
  if row['language_id']!='12':continue
@@ -70,6 +71,7 @@ for key,p in pokemon.items():
  entries[key]={'speciesId':sid,'baseDescription':special};used.add(sid)
 assert entries['1']['speciesId']==387 and not entries['1']['baseDescription']
 assert entries['735']['speciesId']==538 and entries['877']['speciesId']==37
+for sid in used:texts[sid]['text']=texts[sid]['text'].translate(intro_digits)
 payload={'species':{str(sid):texts[sid] for sid in sorted(used)},'pokemon':entries}
 (root/'data/introductions.json').write_text(json.dumps(payload,ensure_ascii=False,separators=(',',':')))
 unknown=[p['name'] for key,p in pokemon.items() if key not in entries and any(p['stats'].values()) and p.get('canonicalId')==p['id']]

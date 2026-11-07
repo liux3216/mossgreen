@@ -6,12 +6,19 @@ from pathlib import Path
 root = Path(__file__).resolve().parent.parent
 path = root / 'data/pokemon.json'
 data = json.loads(path.read_text())
+overrides = json.loads((root / 'data/pokemon-catalog-overrides.json').read_text())
 slots = sorted(data.values(), key=lambda record: record['id'])
 duplicate_groups = defaultdict(list)
 for record in slots:
     record.setdefault('sourceLocations', record['locations'])
+    for key in ('catalogStatus', 'catalogLabel', 'catalogNote', 'relatedIds'):
+        record.pop(key, None)
     record['catalogHidden'] = not any(record['stats'].values()) and record['name'] != '未知图腾'
+    record.update(overrides.get(str(record['id']), {}))
     if record['catalogHidden']:
+        if record.get('catalogStatus'):
+            record.update(canonicalId=record['id'], catalogGroup=None,
+                          catalogPrimaryId=record['id'], formIds=[record['id']])
         continue
     signature = json.dumps([record[key] for key in (
         'gameDexId', 'name', 'stats', 'types', 'abilities', 'catchRate', 'sprite'

@@ -1,0 +1,37 @@
+.machines-page .pokedex-main{max-width:1260px}
+.machine-toc{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 22px}
+.machine-toc a{border:1px solid #b5ceca;border-radius:4px;padding:7px 12px;background:#f5f9f8;text-decoration:none;color:#246b61;font-size:13px}
+.machine-toc a:hover{background:#e4efeb}
+.machine-section{margin:28px 0 34px;scroll-margin-top:90px}
+.machine-section>h2{margin:0 0 14px;font-size:20px;font-weight:600;color:#2d5145}
+.machine-section>h2 small{font-size:12px;font-weight:400;margin-left:10px;color:#708477}
+.machines-table-wrap{border:1px solid #b4cdca;border-radius:5px;overflow-x:auto}
+.machines-table{width:100%;min-width:920px;border-collapse:collapse;table-layout:fixed;font-size:13px}
+.machines-table th,.machines-table td{padding:10px 9px;border-right:1px solid #cbd8d5;border-bottom:1px solid #cbd8d5;vertical-align:middle}
+.machines-table th:last-child,.machines-table td:last-child{border-right:0}
+.machines-table tr:last-child td{border-bottom:0}
+.machines-table th{background:#dcece7;color:#273e38;font-size:12px;font-weight:650;text-align:left;white-space:nowrap}
+.machines-table th button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;padding:0;width:100%;display:flex;align-items:center;justify-content:space-between;gap:4px;white-space:nowrap}
+.machine-sort{color:#82998e;font-size:11px}
+.machines-table th[aria-sort]:not([aria-sort=none]) .machine-sort{color:#126eaa}
+.machines-table th:nth-child(1){width:75px}.machines-table th:nth-child(2){width:125px}.machines-table th:nth-child(3){width:65px}.machines-table th:nth-child(4){width:60px}.machines-table th:nth-child(5),.machines-table th:nth-child(6){width:50px}.machines-table th:nth-child(7){width:43px}.machines-table th:nth-child(8){width:108px}
+.machines-table td:first-child{min-width:0;font-variant-numeric:tabular-nums;font-weight:600;text-align:center}
+.machines-table .machine-row:nth-of-type(4n+3){background:#f4f8f6}.machines-table .machine-row:hover{background:#edf5f1}
+.machines-table td:nth-child(5),.machines-table td:nth-child(6),.machines-table td:nth-child(7){text-align:center;font-variant-numeric:tabular-nums}
+.machines-table .pokedex-type{font-size:11px;min-width:40px;padding:2px 6px}
+.machines-table .move-category{font-size:11px;white-space:nowrap}
+.machines-table a{color:#126eaa;text-decoration:none}.machines-table a:hover{text-decoration:underline}
+.machine-row{scroll-margin-top:95px}
+.machine-move{font-weight:650}
+.machine-count{font:inherit;font-size:12px;background:none;border:0;padding:0;color:#126eaa;cursor:pointer;white-space:nowrap}
+.machine-count:hover{text-decoration:underline}.machine-count[aria-expanded=true]{font-weight:650;color:#245643}
+.machines-table .machine-locations{white-space:normal;font-size:12px;line-height:1.6}
+.machine-place+.machine-place{margin-top:8px}
+.machine-place small{display:block;font-size:11px;line-height:1.5;color:#718579;margin-top:1px}
+.more-machine-places{margin-top:7px}.more-machine-places summary{cursor:pointer;color:#126eaa;font-size:11px}.more-machine-places[open] summary{margin-bottom:8px}
+.machine-details>td{background:#f4f9f6!important;padding:18px 20px!important;text-align:left!important;white-space:normal!important}
+.machine-details h3{font-size:15px;margin:0 0 14px;font-weight:600;color:#2d5145}
+.machine-learners{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 14px;max-height:380px;overflow-y:auto;overscroll-behavior:contain}
+.machine-learners a{display:flex;gap:8px;align-items:center;min-width:0;padding:5px 0;font-size:12px;line-height:1.5}
+.machine-learners img{image-rendering:pixelated;flex:none}.machine-learners span{min-width:0}.machine-learners strong{font-weight:500;overflow-wrap:anywhere}.machine-learners small{display:block;font-size:11px;color:#718579;margin:2px 0 0}
+@media(max-width:760px){.machine-section{margin-top:24px}.machine-section>h2{font-size:18px}.machine-toc{gap:8px}.machine-toc a{font-size:12px}.machine-learners{grid-template-columns:repeat(3,minmax(0,1fr))}.machine-details>td{padding:14px!important}}

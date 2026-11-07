@@ -6,6 +6,8 @@ records=json.loads((root/'data/encounters.json').read_text())
 maps=json.loads((root/'data/map-layouts.json').read_text())
 atlas=json.loads((root/'data/atlas-locations.json').read_text())
 locations=json.loads((root/'data/locations.json').read_text())
+extra=root/'data/atlas-extra-locations.json'
+if extra.exists():locations+=json.loads(extra.read_text())
 pokemon=json.loads((root/'data/pokemon.json').read_text())
 sprites={key:p['sprite'] for key,p in pokemon.items()}
 bykey={}
@@ -16,7 +18,7 @@ shell=shell.replace('aria-current="page"','aria-current="location"')
 for place in locations:
  key=place['anchor'].removeprefix('location-')
  methods=[]
- for method,mons in bykey[(place['name'],place['mapId'])]:
+ for method,mons in bykey.get((place['name'],place['mapId']),[]):
   values=[]
   for sid,chance,levels,name in mons:
    p=pokemon.get(str(sid));values.append({'id':sid,'name':name,'chance':chance,'levels':levels,'sprite':sprites.get(str(sid)), 'types':p['types'] if p and all(p['stats'].values()) else [],'known':bool(p and name)})
@@ -28,11 +30,14 @@ for place in locations:
  detail={**place,'methods':methods,'map':map_value,'atlas':atlas.get(place['mapId']),'related':related}
  data=root/'locations/data';data.mkdir(exist_ok=True)
  (data/(key+'.json')).write_text(json.dumps(detail,ensure_ascii=False,separators=(',',':')))
+ nav_shell=shell
+ if not methods:
+  nav_shell=shell.replace('href="locations/" aria-current="location"','href="locations/"').replace('href="locations/atlas/"','href="locations/atlas/" aria-current="location"')
  page='''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><base href="../../"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>'''+html.escape(place['name'])+''' · 青苔 Wiki</title>
 <link rel="stylesheet" href="pokemon.css"><link rel="stylesheet" href="pokemons/list.css"><link rel="stylesheet" href="locations/map-view.css"><link rel="stylesheet" href="locations/detail.css">
 <script src="locations/map-view.js" defer></script><script src="locations/detail.js" defer></script></head>
-<body class="pokedex-page location-detail-page" data-location="'''+html.escape(key)+'''">'''+shell+'''<main class="pokedex-main">
+<body class="pokedex-page location-detail-page" data-location="'''+html.escape(key)+'''">'''+nav_shell+'''<main class="pokedex-main">
 <h1 id="location-title">'''+html.escape(place['name'])+'''</h1>
 <nav class="breadcrumbs" aria-label="当前位置"><a href="./">百科首页</a><span>/</span><a href="locations/">地点分布</a><span>/</span><span aria-current="page">'''+html.escape(place['name'])+'''</span></nav>
 <p id="location-status" class="list-status" role="status">正在加载地点资料…</p><article id="location-content" hidden>
@@ -44,6 +49,8 @@ for place in locations:
 <footer class="list-footer"><p>比例表示该遇敌方式中宝可梦的槽位权重，不是每走一步的遇敌概率。等级与分布取自当前 ROM，剧情变化另有影响。</p><a href="locations/">← 返回地点目录</a></footer></article>
 <dialog id="map-dialog" class="map-dialog" aria-labelledby="map-title"><div class="map-toolbar"><h2 id="map-title" class="map-title"></h2><form method="dialog"><button class="map-close">关闭</button></form></div><div id="map-legend" class="map-legend"></div><div id="map-full" class="map-full"></div></dialog>
 </main></body></html>'''
+ if not methods:
+  page=page.replace('<span>/</span><a href="locations/">地点分布</a>','<span>/</span><a href="locations/atlas/">查看地图</a>').replace('<a href="locations/">← 返回地点目录</a>','<a href="locations/atlas/">← 返回查看地图</a>')
  for asset in ['pokemon.css','pokemons/list.css','locations/map-view.css','locations/detail.css','locations/map-view.js','locations/detail.js']:
   page=page.replace('"'+asset+'"','"'+asset+'?v='+hashlib.sha256((root/asset).read_bytes()).hexdigest()[:12]+'"')
  destination=root/'locations'/key;destination.mkdir(exist_ok=True);(destination/'index.html').write_text(page)

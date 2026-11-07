@@ -1,0 +1,24 @@
+.walkthrough-main{max-width:1120px}
+.guide-intro{max-width:860px;line-height:1.9}
+.guide-source{font-size:13px;color:#60766e;line-height:1.8;margin:12px 0 24px}
+.guide-toc{padding:22px 24px;border:1px solid #cadbd2;border-radius:5px;background:#f4f9f6;margin:24px 0 32px;scroll-margin-top:90px}
+.guide-toc h2{font-size:18px;margin:0 0 14px}
+.guide-toc ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 34px;margin:0;padding-left:22px;font-size:14px;line-height:1.7}
+.guide-toc a{text-decoration:none;color:#126eaa}.guide-toc a:hover{text-decoration:underline}
+.guide-chapter{border-top:1px solid #cbdad3;margin-top:38px;padding-top:26px;scroll-margin-top:88px}
+.guide-chapter>h2{font-size:23px;line-height:1.5;margin:0 0 12px}
+.guide-chapter-intro{color:#5e746b;font-size:14px;line-height:1.9;margin-bottom:24px}
+.guide-stage{margin:28px 0 34px;scroll-margin-top:90px}
+.guide-stage h3{font-size:18px;line-height:1.65;margin:0 0 14px;color:#274d3d}
+.guide-stage h3 a{color:inherit;text-decoration:none}.guide-stage h3 a:hover{text-decoration:underline}
+.guide-steps{padding-left:24px;margin:0;line-height:1.95;font-size:15px}
+.guide-steps li{padding-left:4px;margin:8px 0}
+.guide-tips{background:#f4f8f5;border-left:3px solid #a1c6b0;padding:10px 16px;margin:18px 0;color:#536c60;font-size:13px;line-height:1.9}
+.guide-tips p{margin:6px 0}
+.guide-places{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;font-size:13px;align-items:center}
+.guide-places span{color:#698276;margin-right:4px}
+.guide-places a{padding:4px 10px;background:#edf5f0;border:1px solid #ccded3;border-radius:4px;color:#126eaa;text-decoration:none}
+.guide-places a:hover{background:#e1eee5;text-decoration:underline}
+.guide-back{font-size:12px;text-align:right;margin:18px 0 0}
+.guide-credits{font-size:13px;line-height:1.9;border-top:1px solid #cbdad3;margin-top:38px;padding-top:22px;color:#5b7367}
+@media(max-width:600px){.guide-toc{padding:18px}.guide-toc ol{grid-template-columns:1fr;gap:9px}.guide-chapter>h2{font-size:21px}.guide-stage h3{font-size:17px}.guide-steps{padding-left:21px;font-size:14px}.guide-tips{padding:9px 12px}.guide-chapter{margin-top:30px;padding-top:22px}}

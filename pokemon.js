@@ -55,11 +55,15 @@ function showGrowth(pokemon, data, growth) {
     el('learnset-note').textContent = growth ? '此形态的升级招式资料待核实。' : '升级招式暂时加载失败，请刷新重试。';
     return;
   }
+  const availableEdges = growth.evolutions.filter(edge => {
+    const special = data[edge.from]?.catalogStatus === 'special-record' || data[edge.to]?.catalogStatus === 'special-record';
+    return !special || pokemon.catalogStatus === 'special-record';
+  });
   const family = new Set([pokemon.id]);
   let changed = true;
   while (changed) {
     changed = false;
-    for (const edge of growth.evolutions) {
+    for (const edge of availableEdges) {
       if (family.has(edge.from) || family.has(edge.to)) {
         for (const id of [edge.from, edge.to]) {
           if (!family.has(id)) { family.add(id); changed = true; }
@@ -67,7 +71,7 @@ function showGrowth(pokemon, data, growth) {
       }
     }
   }
-  const edges = growth.evolutions.filter(e => family.has(e.from) && family.has(e.to));
+  const edges = availableEdges.filter(e => family.has(e.from) && family.has(e.to));
   if (!edges.length) host.append(node('p', info.invalidEvolution ? '此形态的进化记录异常，条件待核实。' : '没有进化记录。'));
   else {
     const roots = [...family].filter(id => !edges.some(e => e.to === id));
@@ -79,7 +83,7 @@ function showGrowth(pokemon, data, growth) {
     }
     for (const id of roots.length ? roots : [pokemon.id]) visit(id, [], new Set([id]));
     for (const path of paths) {
-      if (!path.length) continue;
+      if (!path.length || !path.some(edge => edge.from === pokemon.id || edge.to === pokemon.id)) continue;
       const row = node('div'); row.className = 'evolution-path';
       row.append(evolutionCard(data[path[0].from], pokemon.id));
       for (const edge of path) {
@@ -90,6 +94,12 @@ function showGrowth(pokemon, data, growth) {
       }
       host.append(row);
     }
+  }
+  const evolutionNotes = new Set([...family].flatMap(id => growth.species[id]?.evolutionNotes || []));
+  for (const text of evolutionNotes) {
+    const note = node('p', text);
+    note.className = 'muted small evolution-note';
+    host.append(note);
   }
   el('learnset-note').textContent = info.invalidLearnset ? '部分升级招式记录异常，以下仅列出可识别的记录。' : '按等级列出本形态的升级招式。';
   const rows = [...info.learnset].sort((a, b) => a.level - b.level);
@@ -113,7 +123,7 @@ function showGrowth(pokemon, data, growth) {
 }
 async function showIntroduction(pokemon) {
   try {
-    const response = await fetch('data/introductions.json');
+    const response = await fetch('data/introductions.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('Introduction unavailable');
     const data = await response.json();
     const mapping = data.pokemon[pokemon.id];
@@ -122,7 +132,8 @@ async function showIntroduction(pokemon) {
       el('dex-entry-text').textContent = '暂无可核实的图鉴介绍。';
       return;
     }
-    el('dex-entry-text').textContent = entry.text;
+    el('dex-entry-text').textContent = entry.text.replace(/[０-９]/g, digit =>
+      String.fromCharCode(digit.charCodeAt(0) - 0xFEE0));
     const source = node('a', entry.version);
     source.href = entry.source;
     source.target = '_blank';
@@ -152,12 +163,15 @@ function render(pokemon, data, growth) {
       el('types').append(badge);
     }
   }
-  const forms = (pokemon.formIds || [pokemon.id]).map(id => data[id]).filter(Boolean);
+  const related = (pokemon.relatedIds || []).map(id => data[id]).filter(Boolean);
+  const forms = related.length ? related : (pokemon.formIds || [pokemon.id]).map(id => data[id]).filter(Boolean);
   const currentFormIndex = forms.findIndex(form => form.id === pokemon.id);
   if (forms.length > 1) {
     el('form-section').hidden = false;
-    el('form-label').hidden = false;
-    el('form-label').textContent = '形态 ' + (currentFormIndex + 1) + ' / ' + forms.length;
+    el('form-heading').textContent = related.length ? '相关记录' : '形态';
+    el('form-options').setAttribute('aria-label', related.length ? '查看宝可梦相关记录' : '切换宝可梦形态');
+    el('form-label').hidden = !!related.length && !pokemon.catalogNote;
+    el('form-label').textContent = pokemon.catalogNote || (related.length ? '' : '形态 ' + (currentFormIndex + 1) + ' / ' + forms.length);
     const options = document.createDocumentFragment();
     forms.forEach((form, index) => {
       const link = node('a');
@@ -170,7 +184,7 @@ function render(pokemon, data, growth) {
       image.width = 56;
       image.height = 56;
       const description = node('span');
-      description.append(node('strong', form.name + ' · 形态 ' + (index + 1)));
+      description.append(node('strong', form.name + ' · ' + (related.length ? form.catalogLabel : '形态 ' + (index + 1))));
       const typeLabel = Object.values(form.stats).every(value => value > 0) ? form.types.join(' / ') : '资料待核实';
       description.append(node('small', typeLabel));
       link.append(image, description);

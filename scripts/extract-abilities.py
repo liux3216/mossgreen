@@ -20,7 +20,8 @@ holders=defaultdict(list);locations=defaultdict(dict)
 for p in pokemon.values():
  if p.get('canonicalId')!=p['id'] or not all(p['stats'].values()):continue
  forms=p.get('formIds',[p['id']]);label=p['name']
- if len(forms)>1:label+=' · 形态 '+str(forms.index(p['id'])+1)
+ if p.get('catalogStatus')=='special-record':label+=' · 毒属性特殊记录'
+ elif len(forms)>1:label+=' · 形态 '+str(forms.index(p['id'])+1)
  for a in p['abilities']:
   holders[a['id']].append({'id':p['id'],'name':label,'dex':p.get('gameDexId')})
   for place in p['locations']:

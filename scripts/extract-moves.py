@@ -24,7 +24,8 @@ for sid,info in growth['species'].items():
  p=pokemon[sid];by_move=defaultdict(set)
  for entry in info['learnset']:by_move[entry['move']].add(entry['level'])
  forms=p.get('formIds',[p['id']]);label=p['name']
- if len(forms)>1:label+=' · 形态 '+str(forms.index(p['id'])+1)
+ if p.get('catalogStatus')=='special-record':label+=' · 毒属性特殊记录'
+ elif len(forms)>1:label+=' · 形态 '+str(forms.index(p['id'])+1)
  for mid,levels in by_move.items():learners[mid].append({'id':p['id'],'name':label,'dex':p.get('gameDexId'),'levels':sorted(levels)})
 records=[]
 for mid in range(1,600):

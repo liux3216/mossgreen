@@ -30,7 +30,8 @@ def condition(method,param):
  1:'亲密度达到 220 后升级',2:'白天亲密度达到 220 后升级',3:'夜间亲密度达到 220 后升级',
  4:f'Lv.{param}',5:'连接交换',6:f'携带{item(param)}连接交换',7:f'使用{item(param)}',
  8:f'Lv.{param}，攻击＞防御',9:f'Lv.{param}，攻击＝防御',10:f'Lv.{param}，攻击＜防御',
- 11:f'Lv.{param}，性格值分支一',12:f'Lv.{param}，性格值分支二',13:f'Lv.{param}',
+ 11:f'Lv.{param} 起升级；隐藏性格值高 16 位的十进制个位为 0–4',
+ 12:f'Lv.{param} 起升级；隐藏性格值高 16 位的十进制个位为 5–9',13:f'Lv.{param}',
  14:f'Lv.{param}，队伍有空位且背包有精灵球',15:f'美丽度达到 {param} 后升级'
  }[method]
 def canonical(n):
@@ -48,7 +49,13 @@ for key,p in pokemon.items():
    entry['invalidEvolution']=True;continue
   edge={'from':sid,'to':target,'method':method,'param':param,'condition':condition(method,param)}
   identity=(sid,target,method,param)
-  if identity not in seen:edges.append(edge);entry['evolutions'].append(edge);seen.add(identity)
+  if identity not in seen:entry['evolutions'].append(edge);seen.add(identity)
+ # A damaged row can contain bytes that coincidentally resemble a valid edge.
+ # Keep the row flagged for review instead of publishing a partial evolution.
+ if entry['invalidEvolution']:entry['evolutions']=[]
+ else:edges.extend(entry['evolutions'])
+ if any(edge['method'] in (11,12) for edge in entry['evolutions']):
+  entry['evolutionNotes']=['这里的「性格值」是隐藏的个体编号，与「固执、胆小」等性格无关。取它的高 16 位，转成十进制后看个位数：0–4 对应甲壳茧，5–9 对应盾甲茧，两种分支各约 50%。分支在个体生成时就已固定，同一只刺尾虫读档重试或改变升级时间都不会改变结果；想获得另一条进化路线，需要捕获或孵化不同的刺尾虫。']
  ptr=word(learnsets+4*sid)
  if not 0x8000000<=ptr<0xa000000:entry['invalidLearnset']=True
  else:

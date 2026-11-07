@@ -6,7 +6,10 @@ def word(a):return struct.unpack_from('<I',rom,a&0x1ffffff)[0]
 def raw(a,n):return rom[a&0x1ffffff:][:n]
 def header(g,m):return word(word(0x3526a8+g*4)+m*4)&0x1ffffff
 atlas=json.loads((root/'data/atlas-locations.json').read_text());maps=json.loads((root/'data/map-layouts.json').read_text())
-locations=json.loads((root/'data/locations.json').read_text());by_id={}
+locations=json.loads((root/'data/locations.json').read_text())
+extra=root/'data/atlas-extra-locations.json'
+if extra.exists():locations+=json.loads(extra.read_text())
+by_id={}
 for place in locations:by_id.setdefault(place['mapId'],place)
 # Native FRLG map types, not inferred from place names.
 labels={1:'城镇',2:'城镇',3:'野外',4:'洞穴',5:'水下',6:'水域',8:'室内',9:'室内'}

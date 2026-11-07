@@ -1,0 +1,19 @@
+{
+  "164": {
+    "catalogHidden": true,
+    "catalogStatus": "special-record",
+    "catalogLabel": "毒属性特殊记录",
+    "catalogNote": "这是一条毒属性的特殊记录。朱迪山北段的纳撒尼尔使用 Lv.28 的这一版本，烈箭鹰的孵蛋种类计算也会指向它。小箭雀正常升级获得的是火／飞行属性的火箭雀。",
+    "relatedIds": [
+      969,
+      164
+    ]
+  },
+  "969": {
+    "catalogLabel": "正常进化",
+    "relatedIds": [
+      969,
+      164
+    ]
+  }
+}

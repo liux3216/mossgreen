@@ -16,16 +16,17 @@ function drawEncounters(){
    const types=elt('td');for(const type of p.types){const badge=elt('span',type);badge.className='pokedex-type';badge.dataset.type=type;types.append(badge);}const levels=p.levels.map(([low,high])=>low===high?'Lv.'+low:'Lv.'+low+'–'+high).join('、');row.append(name,types,elt('td',levels),elt('td',p.chance+'%'));body.append(row);
   }table.append(body);wrap.append(table);section.append(wrap);fragment.append(section);
  }
- document.querySelector('#location-encounters').replaceChildren(fragment);document.querySelector('#encounters-empty').hidden=count>0;
+ document.querySelector('#location-encounters').replaceChildren(fragment);document.querySelector('#encounters-empty').hidden=count>0;document.querySelector('#encounters-empty').textContent=place.methods.length?'没有找到对应的宝可梦。':'此地点没有野外随机遇敌记录。';
 }
 async function load(){const status=document.querySelector('#location-status');try{
  const response=await fetch('locations/data/'+document.body.dataset.location+'.json');if(!response.ok)throw Error('地点资料加载失败，请刷新重试。');place=await response.json();
  if(place.map){mapData[place.mapId]=place.map;mapData[place.mapId][0]=place.map[0];}if(place.atlas)atlasLocations[place.mapId]=place.atlas;
- document.querySelector('#location-meta').textContent='地图 '+place.mapId+(place.foreign?' · '+place.foreign:'')+' · '+place.methods.length+' 种遇敌方式';
- const maps=document.querySelector('#location-maps');for(const [label,button] of [['区域总图',atlasPreview(place.name,place.mapId)],['地点详图',preview(place.name,place.mapId)]]){if(!button)continue;const card=elt('section');card.className='location-map-card';card.append(elt('h2',label));if(label==='地点详图'){const [,w,h]=place.map;button.style.width=Math.min(320,320*w/h)+'px';}card.append(button);if(label==='地点详图')card.append(elt('p','点击放大，可切换遇敌格高亮。'));maps.append(card);}
+ document.querySelector('#location-meta').textContent='地图 '+place.mapId+(place.foreign?' · '+place.foreign:'')+(place.methods.length?' · '+place.methods.length+' 种遇敌方式':' · 无野外遇敌记录');
+ const maps=document.querySelector('#location-maps');for(const [label,button] of [['区域总图',atlasPreview(place.name,place.mapId)],['地点详图',preview(place.name,place.mapId)]]){if(!button)continue;const card=elt('section');card.className='location-map-card';card.append(elt('h2',label));if(label==='地点详图'){const [,w,h]=place.map;button.style.width=Math.min(320,320*w/h)+'px';}card.append(button);if(label==='地点详图')card.append(elt('p',place.methods.length?'点击放大，可切换遇敌格高亮。':'点击放大查看地图。'));maps.append(card);}
  const images=[...maps.querySelectorAll('img')];
  await Promise.all(images.map(img=>{img.loading='eager';return img.decode().catch(()=>{});}));
  if(place.related.length){document.querySelector('#related-section').hidden=false;for(const related of place.related){const a=elt('a',related.name);a.href=related.path;document.querySelector('#related-locations').append(a);}}
+ document.querySelector('.location-filters').hidden=!place.methods.length;document.querySelector('.list-footer p').hidden=!place.methods.length;
  const method=document.querySelector('#encounter-method');for(const entry of place.methods){const option=elt('option',entry.name);option.value=entry.name;method.append(option);}method.addEventListener('change',drawEncounters);document.querySelector('#encounter-search').addEventListener('input',drawEncounters);drawEncounters();status.hidden=true;document.querySelector('#location-content').hidden=false;
  }catch(e){status.textContent=e.message;}}
 load();
