@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="口袋妖怪青苔简单版宝可梦资料，查看游戏内的属性、种族值、特性与野外捕捉地点。">
 <title>袋兽 · 青苔 Wiki</title>
-<link rel="stylesheet" href="pokemon.css?v=417e903ed16f">
+<link rel="stylesheet" href="pokemon.css?v=eff64be98266">
 <link rel="stylesheet" href="pokemons/list.css?v=b58f6dbcb838">
 <script src="pokemon.js?v=c3ee23f90a8f" defer></script>
 </head>
@@ -30,7 +30,7 @@
 <section id="form-section" class="card form-section" aria-labelledby="form-heading" hidden><h2 id="form-heading">形态</h2><nav id="form-options" class="form-options" aria-label="切换宝可梦形态"></nav></section>
 <div class="columns">
 <section class="card" aria-labelledby="stats-heading"><h2 id="stats-heading">种族值</h2><div id="stats"></div><p class="total">合计 <strong id="total"></strong></p></section>
-<section class="card" aria-labelledby="info-heading"><h2 id="info-heading">基本资料</h2><dl><dt>属性</dt><dd id="type-text"></dd><dt>特性</dt><dd id="abilities"></dd><dt>捕获率</dt><dd id="catch-rate"></dd></dl><p class="muted small">捕获率为游戏内的基础数值，数值越高通常越容易捕捉。实际成功率还受血量、异常状态和精灵球影响。</p></section>
+<section class="card basic-info" aria-labelledby="info-heading"><h2 id="info-heading">基本资料</h2><dl><dt>属性</dt><dd id="type-text"></dd><dt>特性</dt><dd id="abilities"></dd><dt>捕获率</dt><dd id="catch-rate"></dd></dl><p class="muted small catch-rate-note">捕获率为游戏内的基础数值，数值越高通常越容易捕捉。实际成功率还受血量、异常状态和精灵球影响。</p></section>
 </div>
 <section class="card growth-section" aria-labelledby="evolution-heading"><h2 id="evolution-heading">进化</h2><div id="evolution-chain"><p class="muted small">正在加载进化资料…</p></div></section>
 <section class="card growth-section" aria-labelledby="learnset-heading"><h2 id="learnset-heading">升级招式</h2><p id="learnset-note" class="muted small">正在加载升级招式…</p><div class="table-wrap"><table class="learnset-table"><thead><tr><th scope="col">等级</th><th scope="col">招式</th><th scope="col">属性</th><th scope="col">分类</th><th scope="col">威力</th><th scope="col">命中</th><th scope="col">PP</th></tr></thead><tbody id="learnset"></tbody></table></div></section>
