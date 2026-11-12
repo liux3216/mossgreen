@@ -6,9 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="口袋妖怪青苔简单版宝可梦资料，查看游戏内的属性、种族值、特性与野外捕捉地点。">
 <title>赫拉克罗斯 · 青苔 Wiki</title>
-<link rel="stylesheet" href="pokemon.css?v=eff64be98266">
+<link rel="stylesheet" href="pokemon.css?v=d94ba11cc8db">
 <link rel="stylesheet" href="pokemons/list.css?v=b58f6dbcb838">
-<script src="pokemon.js?v=c3ee23f90a8f" defer></script>
+<script src="pokemon.js?v=6fc969305142" defer></script>
 </head>
 <body class="pokedex-page pokemon-detail-page" data-pokemon-id="260">
 <header class="wiki-header">
@@ -35,9 +35,10 @@
 <section class="card growth-section" aria-labelledby="evolution-heading"><h2 id="evolution-heading">进化</h2><div id="evolution-chain"><p class="muted small">正在加载进化资料…</p></div></section>
 <section class="card growth-section" aria-labelledby="learnset-heading"><h2 id="learnset-heading">升级招式</h2><p id="learnset-note" class="muted small">正在加载升级招式…</p><div class="table-wrap"><table class="learnset-table"><thead><tr><th scope="col">等级</th><th scope="col">招式</th><th scope="col">属性</th><th scope="col">分类</th><th scope="col">威力</th><th scope="col">命中</th><th scope="col">PP</th></tr></thead><tbody id="learnset"></tbody></table></div></section>
 <section class="card encounters" aria-labelledby="encounters-heading">
-<div class="section-top"><div><h2 id="encounters-heading">在哪里捕捉</h2><p id="location-count" class="muted small"></p></div><label class="filter-label">遇敌方式<select id="method"><option value="">全部方式</option></select></label></div>
-<div class="table-wrap"><table><thead><tr><th scope="col">地点</th><th scope="col">方式</th><th scope="col">等级</th><th scope="col">出现比例</th></tr></thead><tbody id="locations"></tbody></table></div>
-<p class="muted small">点击地点可返回对应的地图和完整遇怪表。比例按该方式成功遇敌后的槽位权重计算。这里列出野外随机遇敌记录。</p>
+<div class="section-top"><div><h2 id="encounters-heading">在哪里捕捉</h2><p id="location-count" class="muted small"></p></div><label class="filter-label">获取方式<select id="method"><option value="">全部方式</option></select></label></div>
+<p id="special-acquisition-status" class="muted small" role="status" hidden>特殊获取资料暂时加载失败，请刷新重试。</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">地点</th><th scope="col">方式</th><th scope="col">等级</th><th scope="col">比例／获取条件</th></tr></thead><tbody id="locations"></tbody></table></div>
+<p class="muted small">点击地点可查看地图及获取记录。随机遇敌显示槽位比例；赠送、交换和固定遭遇的条件见表内说明。部分事件需要先推进剧情。</p>
 </section>
 
 </article>

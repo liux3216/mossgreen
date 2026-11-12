@@ -1,1 +1,1 @@
-{"name":"DES.ESGOLHARRÄO（室内 1）","mapId":"41/0","foreign":"Desierto Dibujo","anchor":"location-41-0","methods":[],"pokemon":[],"map":["locations/assets/41-0.webp",13,10,[],[]],"atlas":[[70],""],"related":[{"name":"DES.ESGOLHARRÄO（室内 2）","path":"locations/41-1/"}]}
+{"name":"DES.ESGOLHARRÄO（室内 1）","mapId":"41/0","foreign":"Desierto Dibujo","anchor":"location-41-0","methods":[],"pokemon":[],"map":["locations/assets/41-0.webp",13,10,[],[]],"atlas":[[70],""],"related":[{"name":"DES.ESGOLHARRÄO（室内 2）","path":"locations/41-1/"}],"connections":[],"specialAcquisitions":[]}

@@ -16,24 +16,32 @@ function showLocations(locations, method = '') {
     const row = node('tr');
     const location = node('td');
     const link = node('a', place.name);
-    link.href = 'locations/' + place.anchor.replace(/^location-/, '') + '/';
+    link.href = (place.path || 'locations/' + place.anchor.replace(/^location-/, '') + '/') + (place.kind ? '#special-acquisitions' : '');
     location.append(link, node('small', '地图 ' + place.mapId));
-    const levels = place.levels.map(([low, high]) =>
+    if (place.entrances?.length) {
+      const entry = place.entrances.find(e => e.name === place.preferredEntrance) || place.entrances[0];
+      const hint = node('small', '入口：'), entrance = node('a', entry.name);
+      entrance.href = entry.path; hint.append(entrance, document.createTextNode(entry.method === '挖洞' ? ' · 挖洞' : ''));
+      location.append(hint);
+    }
+    const levels = place.levelNote || place.levels.map(([low, high]) =>
       low === high ? 'Lv.' + low : 'Lv.' + low + '–' + high
-    ).join('、');
-    row.append(location, node('td', place.method), node('td', levels), node('td', place.chance + '%'));
+    ).join('、') || '—';
+    const condition = node('td', place.kind ? place.conditions.join(' ') : place.chance + '%');
+    if (place.kind) { row.className = 'special-acquisition'; condition.className = 'acquisition-condition'; }
+    row.append(location, node('td', place.method), node('td', levels), condition);
     fragment.append(row);
   }
   if (!visible.length) {
     const row = node('tr');
-    const cell = node('td', '暂无野外随机遇敌记录，其他获取方式待补充。');
+    const cell = node('td', '暂无直接获取记录，可查看上方进化链。');
     cell.colSpan = 4;
     row.append(cell);
     fragment.append(row);
   }
   el('locations').replaceChildren(fragment);
   const maps = new Set(visible.map(place => place.mapId)).size;
-  el('location-count').textContent = maps + ' 个地图分区 · ' + visible.length + ' 组遇敌记录';
+  el('location-count').textContent = maps + ' 个地图分区 · ' + visible.length + ' 条获取记录';
 }
 function evolutionCard(record, currentId) {
   const link = node('a');
@@ -146,7 +154,7 @@ async function showIntroduction(pokemon) {
     el('dex-entry-text').textContent = '图鉴介绍暂时加载失败，请刷新重试。';
   }
 }
-function render(pokemon, data, growth) {
+function render(pokemon, data, growth, special, specialFailed) {
   document.title = pokemon.name + ' · 青苔 Wiki';
   el('name').textContent = pokemon.name;
   el('breadcrumb-name').textContent = pokemon.name;
@@ -227,13 +235,15 @@ function render(pokemon, data, growth) {
     });
   } else el('abilities').textContent = '待核实';
   el('catch-rate').textContent = verified ? pokemon.catchRate + ' / 255' : '待核实';
-  for (const method of new Set(pokemon.locations.map(place => place.method))) {
+  const acquisitions = [...pokemon.locations, ...(special?.pokemon[pokemon.id] || [])];
+  for (const method of new Set(acquisitions.map(place => place.method))) {
     const option = node('option', method);
     option.value = method;
     el('method').append(option);
   }
-  el('method').addEventListener('change', event => showLocations(pokemon.locations, event.target.value));
-  showLocations(pokemon.locations);
+  el('method').addEventListener('change', event => showLocations(acquisitions, event.target.value));
+  showLocations(acquisitions);
+  el('special-acquisition-status').hidden = !specialFailed;
   showGrowth(pokemon, data, growth);
   showIntroduction(pokemon);
   el('status').hidden = true;
@@ -257,12 +267,14 @@ async function load() {
       location.replace('pokemons/' + record.canonicalId + '/');
       return;
     }
-    let growth = null;
-    try {
-      const response = await fetch('data/growth.json');
-      if (response.ok) growth = await response.json();
-    } catch (_) { /* Keep the basic detail page available if growth data fails. */ }
-    render(record, data, growth);
+    const optional = await Promise.allSettled(['data/growth.json', 'data/special-acquisitions.json'].map(async path => {
+      const response = await fetch(path);
+      if (!response.ok) throw new Error('资料加载失败');
+      return response.json();
+    }));
+    const growth = optional[0].status === 'fulfilled' ? optional[0].value : null;
+    const special = optional[1].status === 'fulfilled' ? optional[1].value : null;
+    render(record, data, growth, special, !special);
   } catch (error) {
     el('status').hidden = true;
     el('error').hidden = false;

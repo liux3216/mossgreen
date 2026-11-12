@@ -1,7 +1,7 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><base href="../../"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>地图 3/55 · 青苔 Wiki</title>
-<link rel="stylesheet" href="pokemon.css?v=94e75784da6a"><link rel="stylesheet" href="pokemons/list.css?v=b58f6dbcb838"><link rel="stylesheet" href="locations/map-view.css?v=ce4b84b828fd"><link rel="stylesheet" href="locations/detail.css?v=72e24ea473c0">
-<script src="locations/map-view.js?v=873c02b4162e" defer></script><script src="locations/detail.js?v=bd5eb74a2d64" defer></script></head>
+<link rel="stylesheet" href="pokemon.css?v=d94ba11cc8db"><link rel="stylesheet" href="pokemons/list.css?v=b58f6dbcb838"><link rel="stylesheet" href="locations/map-view.css?v=fc7e40c7dea1"><link rel="stylesheet" href="locations/detail.css?v=d392112af649">
+<script src="locations/map-view.js?v=49d3f032632e" defer></script><script src="locations/detail.js?v=34b2683474ef" defer></script></head>
 <body class="pokedex-page location-detail-page" data-location="3-55"><header class="wiki-header">
 <a class="wiki-brand" href="./"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 5h7l2 2 2-2h7v15h-7l-2 2-2-2H3zm2 2v11h6V9L9 7zm8 2v9h6V7h-4z"/></svg>宝可梦青苔 百科</a>
 </header>
@@ -14,7 +14,9 @@
 <nav class="breadcrumbs" aria-label="当前位置"><a href="./">百科首页</a><span>/</span><a href="locations/">地点分布</a><span>/</span><span aria-current="page">地图 3/55</span></nav>
 <p id="location-status" class="list-status" role="status">正在加载地点资料…</p><article id="location-content" hidden>
 <p id="location-meta" class="muted small"></p><div id="location-maps" class="location-maps"></div>
+<section class="location-connections" aria-labelledby="connections-heading"><h2 id="connections-heading">相邻地点</h2><nav id="connected-locations" aria-label="相邻地点"></nav><p id="connections-empty" class="muted small" hidden>暂未记录可通往的相邻地点。</p><p id="connections-note" class="muted small" hidden></p></section>
 <section id="related-section" class="related-section" hidden><h2>同名地点</h2><nav id="related-locations" aria-label="同名地点"></nav></section>
+<section id="special-acquisitions" class="location-special-acquisitions" aria-labelledby="special-acquisitions-heading" hidden><h2 id="special-acquisitions-heading">特殊获取</h2><div class="location-table-wrap"><table class="location-encounter-table"><thead><tr><th scope="col">宝可梦</th><th scope="col">方式</th><th scope="col">等级</th><th scope="col">获取条件</th></tr></thead><tbody id="special-acquisition-rows"></tbody></table></div></section>
 <section class="location-encounters" aria-labelledby="encounters-heading"><h2 id="encounters-heading">野生宝可梦</h2>
 <div class="filter-fields location-filters"><label class="name-filter" for="encounter-search">查找宝可梦<input id="encounter-search" type="search" placeholder="名称或内部编号" autocomplete="off"></label><label for="encounter-method">遇敌方式<select id="encounter-method"><option value="">全部方式</option></select></label></div>
 <div id="location-encounters"></div><p id="encounters-empty" class="empty-state" hidden>没有找到对应的宝可梦。</p></section>

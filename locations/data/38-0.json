@@ -1,1 +1,1 @@
-{"name":"BOSQUE MACACO（室内 1）","mapId":"38/0","foreign":"Bosque de Monos","anchor":"location-38-0","methods":[],"pokemon":[],"map":["locations/assets/38-0.webp",25,13,[],[]],"atlas":[[45],""],"related":[{"name":"BOSQUE MACACO","path":"locations/3-49/"}]}
+{"name":"BOSQUE MACACO（室内 1）","mapId":"38/0","foreign":"Bosque de Monos","anchor":"location-38-0","methods":[],"pokemon":[],"map":["locations/assets/38-0.webp",25,13,[],[]],"atlas":[[45],""],"related":[{"name":"BOSQUE MACACO","path":"locations/3-49/"}],"connections":[],"specialAcquisitions":[]}

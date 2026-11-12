@@ -25,6 +25,19 @@ function mapArt(id){
  }
  return box;
 }
+function terrainZoom(art,viewport,width){
+ const controls=elt('div');controls.className='map-zoom';controls.setAttribute('aria-label','地图缩放');
+ const options=[['适应宽度','fit'],['原始大小',1],['2×',2]],buttons=[];
+ function setZoom(value){
+  art.style.width=(value==='fit'?Math.min(width,viewport.clientWidth):width*value)+'px';
+  for(const [button,mode] of buttons)button.setAttribute('aria-pressed',String(mode===value));
+ }
+ for(const [label,value] of options){
+  const button=elt('button',label);button.type='button';button.addEventListener('click',()=>setZoom(value));
+  buttons.push([button,value]);controls.append(button);
+ }
+ return {controls,fit:()=>setZoom('fit')};
+}
 function preview(map,id){
  if(!mapData[id])return null;
  const b=elt('button');b.type='button';b.className='map-preview';
@@ -32,8 +45,10 @@ function preview(map,id){
  b.append(mapArt(id));
  b.addEventListener('click',()=>{
   mapTitle.textContent=map+' · '+id;full.classList.remove('hidden-overlay');
-  const art=mapArt(id);art.querySelector('img').loading='eager';full.replaceChildren(art);
+  const art=mapArt(id);art.querySelector('img').loading='eager';
+  const viewport=elt('div');viewport.className='map-viewport';viewport.tabIndex=0;viewport.setAttribute('role','region');viewport.setAttribute('aria-label',map+' 地图，可滚动查看');viewport.append(art);full.replaceChildren(viewport);
   const [,w,h,land,water]=mapData[id];
+  const zoom=terrainZoom(art,viewport,w*16);
   legend.replaceChildren();
   if(land.length||water.length){
    const label=elt('label'), toggle=elt('input');
@@ -42,7 +57,7 @@ function preview(map,id){
    const text=[land.length?'黄色：陆地遇敌格':'',water.length?'蓝色：水域遇敌格':''].filter(Boolean).join(' · ');
    label.append(toggle,document.createTextNode(text));legend.append(label,elt('p',w+' × '+h+' 格 · 按 ROM 的初始地块标记'));
   }else legend.textContent=w+' × '+h+' 格 · 这张地图未识别到可高亮的遇敌地块。遇敌表存在不代表地图里有对应地块。';
-  dialog.showModal();
+  legend.append(zoom.controls);dialog.showModal();zoom.fit();
  });
  return b;
 }

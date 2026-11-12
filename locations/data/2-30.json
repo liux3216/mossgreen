@@ -1,1 +1,1 @@
-{"name":"MUNIQUE","mapId":"2/30","foreign":"","anchor":"location-2-30","methods":[],"pokemon":[],"map":["locations/assets/2-30.webp",46,35,[],[]],"atlas":[[267],"相连地图入口参考"],"related":[]}
+{"name":"MUNIQUE","mapId":"2/30","foreign":"","anchor":"location-2-30","methods":[],"pokemon":[],"map":["locations/assets/2-30.webp",46,35,[],[]],"atlas":[[267],"相连地图入口参考"],"related":[],"connections":[{"name":"宾利市（室内 20）","mapId":"28/1","path":"locations/28-1/","routes":["出入口"]}],"specialAcquisitions":[]}

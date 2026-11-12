@@ -27,7 +27,7 @@ for place in locations:
  rows.append({**{k:v for k,v in place.items() if k!='pokemon'},'pokemonCount':len(place['pokemon']),
  'key':place['anchor'].removeprefix('location-'),'type':labels.get(kind,'其他'),'cells':cells,'note':note,
  'path':'locations/'+place['anchor'].removeprefix('location-')+'/',
- 'image':'locations/assets/'+place['mapId'].replace('/','-')+'.webp' if mapdata else None,
+ 'image':(mapdata[0] if mapdata[0].startswith('locations/') else 'locations/assets/'+place['mapId'].replace('/','-')+'.webp') if mapdata else None,
  'size':mapdata[1:3] if mapdata else None,'connections':connections})
 assert not any(p['mapId']=='1/64' for p in rows)
 (root/'data/atlas.json').write_text(json.dumps(rows,ensure_ascii=False,separators=(',',':')))
