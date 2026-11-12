@@ -1,4 +1,6 @@
 """Group ROM slots into dex entries while retaining distinct playable forms."""
+from base64 import b64decode
+from hashlib import sha256
 import json
 from collections import defaultdict
 from pathlib import Path
@@ -9,6 +11,9 @@ data = json.loads(path.read_text())
 overrides = json.loads((root / 'data/pokemon-catalog-overrides.json').read_text())
 slots = sorted(data.values(), key=lambda record: record['id'])
 duplicate_groups = defaultdict(list)
+# The ROM uses these images as placeholders when menu or front artwork is missing.
+QUESTION_MARK_ICON = '00d4d1907375eb9cd6ef9ad119a99df21be61d98cbeaf3f51364124da040bbbc'
+QUESTION_MARK_SPRITE = '6a212ff718e3e2c879d5230d7da3b922ef965bdd15a1b8a0b332430d92ed4d0f'
 for record in slots:
     record.setdefault('sourceLocations', record['locations'])
     for key in ('catalogStatus', 'catalogLabel', 'catalogNote', 'relatedIds'):
@@ -20,6 +25,11 @@ for record in slots:
             record.update(canonicalId=record['id'], catalogGroup=None,
                           catalogPrimaryId=record['id'], formIds=[record['id']])
         continue
+    icon = record.get('icon')
+    sprite = record.get('sprite')
+    if sprite and (not icon or sha256(b64decode(icon)).hexdigest() == QUESTION_MARK_ICON):
+        if sha256(b64decode(sprite)).hexdigest() != QUESTION_MARK_SPRITE:
+            record['icon'] = sprite
     signature = json.dumps([record[key] for key in (
         'gameDexId', 'name', 'stats', 'types', 'abilities', 'catchRate', 'sprite'
     )], sort_keys=True, ensure_ascii=False)

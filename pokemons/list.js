@@ -115,7 +115,7 @@ function show(pokemon) {
 }
 async function load() {
   try {
-    const response = await fetch('data/pokemon.json');
+    const response = await fetch('data/pokemon.json', { cache: 'no-cache' });
     if (!response.ok) throw new Error('宝可梦图鉴加载失败，请刷新重试。');
     const data = await response.json();
     const pokemon = Object.values(data)
