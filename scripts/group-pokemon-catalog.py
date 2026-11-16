@@ -9,6 +9,12 @@ root = Path(__file__).resolve().parent.parent
 path = root / 'data/pokemon.json'
 data = json.loads(path.read_text())
 overrides = json.loads((root / 'data/pokemon-catalog-overrides.json').read_text())
+# Verified duplicates can share an entry even if the ROM assigns two dex numbers.
+canonical_aliases = overrides.pop('canonicalAliases', {})
+# Keep the raw slots for reference while omitting tested unavailable maps
+# from the player-facing species list.
+unavailable_encounter_maps = overrides.pop('unavailableEncounterMaps', {})
+identity_fields = ('name', 'stats', 'types', 'abilities', 'catchRate', 'sprite')
 slots = sorted(data.values(), key=lambda record: record['id'])
 duplicate_groups = defaultdict(list)
 # The ROM uses these images as placeholders when menu or front artwork is missing.
@@ -30,18 +36,32 @@ for record in slots:
     if sprite and (not icon or sha256(b64decode(icon)).hexdigest() == QUESTION_MARK_ICON):
         if sha256(b64decode(sprite)).hexdigest() != QUESTION_MARK_SPRITE:
             record['icon'] = sprite
-    signature = json.dumps([record[key] for key in (
-        'gameDexId', 'name', 'stats', 'types', 'abilities', 'catchRate', 'sprite'
-    )], sort_keys=True, ensure_ascii=False)
+    canonical_id = canonical_aliases.get(str(record['id']))
+    if canonical_id is None:
+        dex_id = record['gameDexId']
+    else:
+        target = data[str(canonical_id)]
+        assert all(record[key] == target[key] for key in (*identity_fields, 'nationalId')), record['id']
+        dex_id = target['gameDexId']
+    signature = json.dumps([dex_id, *(record[key] for key in identity_fields)],
+                           sort_keys=True, ensure_ascii=False)
     duplicate_groups[signature].append(record)
 canonical = []
 for records in duplicate_groups.values():
-    first = records[0]
+    preferred_ids = {canonical_aliases[str(r['id'])] for r in records if str(r['id']) in canonical_aliases}
+    if preferred_ids:
+        assert len(preferred_ids) == 1
+        first = next(record for record in records if record['id'] in preferred_ids)
+    else:
+        first = records[0]
     canonical.append(first)
     places = {}
+    unavailable = set(unavailable_encounter_maps.get(str(first['id']), ()))
     for record in records:
         record['canonicalId'] = first['id']
         for place in record['sourceLocations']:
+            if place['mapId'] in unavailable:
+                continue
             key = (place['anchor'], place['method'])
             if key not in places:
                 places[key] = {**place, 'chance': 0, 'levels': []}

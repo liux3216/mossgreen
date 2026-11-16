@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Build the Chinese walkthrough from the credited, author-authorized guide notes."""
 from pathlib import Path
+from wiki_language import add_wiki_language
 import json,re,html,hashlib
 root=Path(__file__).resolve().parent.parent
 data=json.loads((root/'data/walkthrough.json').read_text())
@@ -37,5 +38,5 @@ for section in data['sections']:
  parts.append('<p class="guide-back"><a href="walkthrough/#contents">返回攻略目录 ↑</a></p></section>')
 source=data['source']
 parts.append('<footer class="guide-credits"><p>原攻略作者：'+esc('、'.join(source['authors']))+'。'+esc(source['permission'])+'</p><p>来源：<a href="'+esc(source['url'])+'" target="_blank" rel="noopener noreferrer">'+esc(source['title'])+'</a>，流程部分（原文第 13–27 页）。本页为中文流程整理；原指南与汉化版本可能存在差异，剧情分支以游戏内对话为准。</p></footer></main></body></html>')
-(root/'walkthrough/index.html').write_text('\n'.join(parts))
+(root/'walkthrough/index.html').write_text(add_wiki_language('\n'.join(parts)))
 print('Built walkthrough:',len(data['sections']),'chapters,',sum(len(s['stages']) for s in data['sections']),'stages')

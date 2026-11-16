@@ -33,7 +33,7 @@ function drawEncounters(){
  const fragment=document.createDocumentFragment();let count=0;
  for(const entry of place.methods){
   if(method&&entry.name!==method)continue;
-  const rows=entry.pokemon.filter(p=>!query||(p.name||'').toLowerCase().includes(query)||String(p.id).includes(query));
+  const rows=entry.pokemon.filter(p=>!query||wikiLanguage.matches(p.name,query)||String(p.id).includes(query));
   if(!rows.length)continue;count+=rows.length;
   const section=elt('section');section.className='encounter-method';section.append(elt('h3',entry.name));
   const wrap=elt('div');wrap.className='location-table-wrap';const table=elt('table');table.className='location-encounter-table';
@@ -49,7 +49,9 @@ async function load(){const status=document.querySelector('#location-status');tr
  if(place.map){mapData[place.mapId]=place.map;mapData[place.mapId][0]=place.map[0];}if(place.atlas)atlasLocations[place.mapId]=place.atlas;
  document.querySelector('#location-meta').textContent='地图 '+place.mapId+(place.foreign?' · '+place.foreign:'')+(place.methods.length?' · '+place.methods.length+' 种遇敌方式':' · 无野外遇敌记录');
  const maps=document.querySelector('#location-maps');for(const [label,button] of [['区域总图',atlasPreview(place.name,place.mapId)],['地点详图',preview(place.name,place.mapId)]]){if(!button)continue;const card=elt('section');card.className='location-map-card';card.append(elt('h2',label));if(label==='地点详图'){const [,w,h]=place.map;button.style.width=Math.min(320,320*w/h)+'px';}card.append(button);if(label==='地点详图')card.append(elt('p',place.methods.length?'点击放大，可切换遇敌格高亮。':'点击放大查看地图。'));maps.append(card);}
- const images=[...maps.querySelectorAll('img')];
+ const waterPreview=document.querySelector('#water-layout-preview');
+ if(waterPreview&&place.waterMap)waterPreview.append(preview(place.name,place.mapId,place.waterMap,'水域示意图'));
+ const images=[...document.querySelectorAll('#location-maps img, #water-layout-preview img')];
  await Promise.all(images.map(img=>{img.loading='eager';return img.decode().catch(()=>{});}));
  drawConnections();
  drawSpecialAcquisitions();

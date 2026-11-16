@@ -1,6 +1,7 @@
 """Build independent static location pages and shared map assets from the atlas."""
-import base64,hashlib,html,json,re
+import base64,hashlib,html,json,re,sys
 from pathlib import Path
+from wiki_language import add_wiki_language
 root=Path(__file__).resolve().parent.parent
 records=json.loads((root/'data/encounters.json').read_text())
 maps=json.loads((root/'data/map-layouts.json').read_text())
@@ -10,6 +11,7 @@ locations=json.loads((root/'data/locations.json').read_text())
 extra=root/'data/atlas-extra-locations.json'
 if extra.exists():locations+=json.loads(extra.read_text())
 pokemon=json.loads((root/'data/pokemon.json').read_text())
+unavailable_maps=json.loads((root/'data/pokemon-catalog-overrides.json').read_text()).get('unavailableEncounterMaps',{})
 special_path=root/'data/special-acquisitions.json'
 special=json.loads(special_path.read_text()).get('locations',{}) if special_path.exists() else {}
 sprites={key:p['sprite'] for key,p in pokemon.items()}
@@ -18,13 +20,23 @@ for name,id,foreign,method,mons in records:bykey.setdefault((name,id),[]).append
 directory=(root/'locations/index.html').read_text()
 shell=directory[directory.index('<header class="wiki-header">'):directory.index('<main class="pokedex-main">')]
 shell=shell.replace('aria-current="page"','aria-current="location"')
-for place in locations:
+if len(sys.argv)>1:
+ requested=set(sys.argv[1:])
+ unknown=requested-{place['mapId'] for place in locations}
+ if unknown:
+  raise SystemExit('Unknown map IDs: '+', '.join(sorted(unknown)))
+ locations_to_build=[place for place in locations if place['mapId'] in requested]
+else:
+ locations_to_build=locations
+for place in locations_to_build:
  key=place['anchor'].removeprefix('location-')
  methods=[]
  for method,mons in bykey.get((place['name'],place['mapId']),[]):
   values=[]
   for sid,chance,levels,name in mons:
-   p=pokemon.get(str(sid));values.append({'id':sid,'name':name,'chance':chance,'levels':levels,'sprite':sprites.get(str(sid)), 'types':p['types'] if p and all(p['stats'].values()) else [],'known':bool(p and name)})
+   p=pokemon.get(str(sid));species_id=p.get('canonicalId',sid) if p else sid
+   if place['mapId'] in unavailable_maps.get(str(species_id),()):continue
+   values.append({'id':sid,'name':name,'chance':chance,'levels':levels,'sprite':sprites.get(str(sid)), 'types':p['types'] if p and all(p['stats'].values()) else [],'known':bool(p and name)})
   methods.append({'name':method,'pokemon':values})
  layout=maps.get(place['mapId']);map_value=None
  if layout:map_value=[layout[0] if layout[0].startswith('locations/') else 'locations/assets/'+place['mapId'].replace('/','-')+'.webp',*layout[1:]]
@@ -32,6 +44,8 @@ for place in locations:
  related=[{'name':p['name'],'path':'locations/'+p['anchor'].removeprefix('location-')+'/'} for p in locations if p['anchor']!=place['anchor'] and p['name'].split('（')[0]==base_name]
  specials=[{**entry,'pokemonName':pokemon[str(entry['pokemonId'])]['name'],'sprite':pokemon[str(entry['pokemonId'])]['sprite']} for entry in special.get(place['mapId'],[])]
  detail={**place,'methods':methods,'map':map_value,'atlas':atlas.get(place['mapId']),'related':related,'connections':connections[place['mapId']],'specialAcquisitions':specials}
+ if place['mapId']=='1/87':
+  detail['waterMap']=json.loads((root/'data/cemetery-water-layout.json').read_text())
  data=root/'locations/data';data.mkdir(exist_ok=True)
  (data/(key+'.json')).write_text(json.dumps(detail,ensure_ascii=False,separators=(',',':')))
  nav_shell=shell
@@ -57,7 +71,19 @@ for place in locations:
 </main></body></html>'''
  if not methods:
   page=page.replace('<span>/</span><a href="locations/">地点分布</a>','<span>/</span><a href="locations/atlas/">查看地图</a>').replace('<a href="locations/">← 返回地点目录</a>','<a href="locations/atlas/">← 返回查看地图</a>')
+ if place['mapId']=='1/61':
+  entrance='''<section class="location-connections" aria-labelledby="entrance-heading"><h2 id="entrance-heading">怎么进入</h2>
+<p><strong>左上房间（主线）</strong>。从<a href="locations/3-35/">普里皮亚特镇</a>进入<a href="locations/1-59/">核电站南口入口区</a>，往左走到两个书架之间的灰色门（5, 27），继续按上。若安保机器人挡门，先去<a href="locations/1-60/">分区 2</a>调查左上方的书架（7, 9），找到密码「紫色」，再回南口与机器人对话并击败它。</p>
+<p><strong>反应堆房间（支线）</strong>。向 Morgana 接取<a href="walkthrough/#illuminati-8">光明会任务八「重建普里皮亚特」</a>，回到分区 2，从左上方的灰色门（4, 1）进入。击败门前的机器人后，楼梯会把你送到分区 3 的下方房间。</p>
+<p>三个控制面板依次在（30, 42）、（71, 33）和（68, 2）。关掉第一块后，沿原路回到下方入口房间，走（53, 65）的门。关掉第二块后再回到入口房间，走（48, 65）的门。</p></section>'''
+  page=page.replace('<section class="location-connections" aria-labelledby="connections-heading">',entrance+'\n<section class="location-connections" aria-labelledby="connections-heading">',1)
+ if place['mapId']=='1/87':
+  water_layout='''<section class="location-map-card" aria-labelledby="water-layout-heading"><h2 id="water-layout-heading">水域示意图</h2>
+<div id="water-layout-preview"></div>
+<p>点击放大，可切换遇敌格高亮。</p>
+<p>完成德拉科·马尔福的基拉祈事件后，游戏会在载入地图时切换为水域地形。冲浪和钓鱼记录适用于水域地形。</p></section>'''
+  page=page.replace('</div>\n<section class="location-connections" aria-labelledby="connections-heading">','</div>\n'+water_layout+'\n<section class="location-connections" aria-labelledby="connections-heading">',1)
  for asset in ['pokemon.css','pokemons/list.css','locations/map-view.css','locations/detail.css','locations/map-view.js','locations/detail.js']:
   page=page.replace('"'+asset+'"','"'+asset+'?v='+hashlib.sha256((root/asset).read_bytes()).hexdigest()[:12]+'"')
- destination=root/'locations'/key;destination.mkdir(exist_ok=True);(destination/'index.html').write_text(page)
-print('Built',len(locations),'location detail pages')
+ destination=root/'locations'/key;destination.mkdir(exist_ok=True);(destination/'index.html').write_text(add_wiki_language(page))
+print('Built',len(locations_to_build),'location detail pages')

@@ -4,10 +4,11 @@ import hashlib
 import json
 import re
 from pathlib import Path
+from wiki_language import add_wiki_language
 
 root = Path(__file__).resolve().parent.parent
 pokemon = json.loads((root / 'data/pokemon.json').read_text())
-template = (root / 'pokemon.html').read_text()
+template = add_wiki_language((root / 'pokemon.html').read_text())
 # Change resource URLs whenever content changes, including for returning visitors.
 for asset in ('pokemon.js', 'pokemon.css', 'pokemons/list.css'):
     digest = hashlib.sha256((root / asset).read_bytes()).hexdigest()[:12]

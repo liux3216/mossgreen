@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<base href="../">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>修复与改进 · 青苔 Wiki</title>
+<meta name="description" content="《口袋妖怪青苔》汉化简单版 ROM 的修复记录和新增功能。">
+<link rel="stylesheet" href="pokemon.css?v=d94ba11cc8db">
+<link rel="stylesheet" href="pokemons/list.css?v=6fcfa17c6cea">
+<link rel="stylesheet" href="walkthrough/style.css?v=c8b22f47bb83">
+<link rel="stylesheet" href="wiki-language.css?v=325edd3d207c">
+<script src="wiki-language.js?v=7990eb3d3bb0" defer></script>
+</head>
+<body class="pokedex-page walkthrough-page">
+<header class="wiki-header">
+<a class="wiki-brand" href="./"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 5h7l2 2 2-2h7v15h-7l-2 2-2-2H3zm2 2v11h6V9L9 7zm8 2v9h6V7h-4z"/></svg>口袋妖怪青苔 百科</a>
+</header>
+<aside class="wiki-sidebar" aria-label="百科导航">
+<p>口袋妖怪青苔 百科</p>
+<nav><a href="./">首页</a><a href="pokemons/">宝可梦图鉴</a><a href="moves/">招式一览</a><a href="machines/">招式学习机</a><a href="abilities/">特性一览</a><a href="items/">道具一览</a><a href="locations/">地点分布</a><a href="locations/atlas/">查看地图</a><a href="walkthrough/">流程攻略</a><a href="changelog/" aria-current="page">修复与改进</a></nav>
+</aside>
+
+<main class="pokedex-main walkthrough-main">
+<h1>修复与改进</h1>
+<nav class="breadcrumbs" aria-label="当前位置"><a href="./">百科首页</a><span>/</span><span aria-current="page">修复与改进</span></nav>
+<p class="page-intro guide-intro">记录《口袋妖怪青苔》汉化简单版 ROM 的累积修复和新增功能。</p>
+
+<div class="guide-places">
+<a href="changelog/downloads/mossgreen-easy-item-pickup-fix.gba" download="口袋妖怪青苔_简单版_道具拾取提示修复版.gba">下载最新版 ROM</a>
+<span>GBA · 32 MiB</span>
+</div>
+
+<nav class="guide-toc" aria-labelledby="contents-heading">
+<h2 id="contents-heading">更新目录</h2>
+<ol>
+<li><a href="changelog/#pickups">道具拾取</a></li>
+<li><a href="changelog/#maps-and-fly">地图与飞翔</a></li>
+<li><a href="changelog/#convenience">设置与操作</a></li>
+<li><a href="changelog/#pokedex">图鉴与能力查看</a></li>
+<li><a href="changelog/#battle-and-pokemon">战斗、进化与孵蛋</a></li>
+<li><a href="changelog/#story-and-save">剧情与存档</a></li>
+</ol>
+</nav>
+
+<section class="guide-chapter" id="pickups" aria-labelledby="heading-pickups">
+<h2 id="heading-pickups">道具拾取</h2>
+<ul class="guide-steps">
+<li>修正 222 处地面道具的拾取脚本。道具成功放入背包后，地上的精灵球才会消失。</li>
+<li>捡到地面道具或隐藏道具时会显示名称，并等待按键确认。背包满时会显示提示，可以腾出空间后回来再捡。</li>
+<li>旧存档中已被标记为拾取的道具会保留原有状态。</li>
+</ul>
+</section>
+
+<section class="guide-chapter" id="maps-and-fly" aria-labelledby="heading-maps-and-fly">
+<h2 id="heading-maps-and-fly">地图与飞翔</h2>
+<ul class="guide-steps">
+<li>城镇地图和 HM02「飞翔」默认打开完整地图。主角头像按所在区域或对应入口定位，修正拉斯维加斯等地点跳到地图左上角的问题。火星等缺少可靠坐标的区域会隐藏主角头像。</li>
+<li>修复飞翔地点全部解锁时的黑屏，以及从超能市、复兴市出发时目的地缺失的问题。到访金丝雀市、凤凰岛的宝可梦中心后，可飞到各自的中心门口。最新版已验证全部 20 个飞翔目的地。</li>
+<li>补齐区域地图右下角的五块海面，在城镇地图和图鉴分布图中同步显示。</li>
+<li>重绘宠物公墓分区 4 的水域、岩壁和楼梯平台。修复凤凰岛西北角可以在海面上步行的问题。</li>
+</ul>
+</section>
+
+<section class="guide-chapter" id="convenience" aria-labelledby="heading-convenience">
+<h2 id="heading-convenience">设置与操作</h2>
+<ul class="guide-steps">
+<li>设置里可调整战斗经验和步数倍率，两项均有 1×、2×、3×、5×、10× 五档。步数倍率加快孵蛋、培育屋计步和走路增加亲密度，走路速度按原设置。</li>
+<li>遇敌倍率可选 1×、0.5×、2× 或关闭。它作用于草丛、洞穴、冲浪和碎岩的随机遇敌。钓鱼、甜甜香气和剧情战斗沿用原规则。</li>
+<li>在野外打开背包，按 START 可整理当前口袋。道具可按名称、类别或数量排序，重要道具可按名称排序，精灵球可按名称或数量排序。SELECT 可手动调整顺序。</li>
+<li>在电脑里按 L 切到上一箱，按 R 切到下一箱。第 1 箱与第 14 箱可以循环切换，拿起宝可梦后也能换箱。箱内预览和格子图标分别对齐底部。</li>
+<li>走出建筑后会沿出口方向自动前进一步，出口被挡住时停在原处。</li>
+</ul>
+</section>
+
+<section class="guide-chapter" id="pokedex" aria-labelledby="heading-pokedex">
+<h2 id="heading-pokedex">图鉴与能力查看</h2>
+<ul class="guide-steps">
+<li>已捕获的宝可梦可在游戏图鉴中按 SELECT 切换图鉴介绍与种族值。按 A 打开更新后的野外分布图，红点标示随机遇敌地点。</li>
+<li>汉化图鉴介绍和宝可梦分类，以及招式和宝可梦资料页共用的属性图标。</li>
+<li>在队伍或电脑的「宝可梦能力」页按 A，可循环查看实际能力、种族值（BASE）、个体值（IV）和努力值（EV）。</li>
+<li>补齐双卵细胞球和蒂安希的队伍图标。</li>
+</ul>
+</section>
+
+<section class="guide-chapter" id="battle-and-pokemon" aria-labelledby="heading-battle-and-pokemon">
+<h2 id="heading-battle-and-pokemon">战斗、进化与孵蛋</h2>
+<ul class="guide-steps">
+<li>修复草地战斗入场时重叠的圆草坪，并上移单打敌方宝可梦的站位。进化背景移除双方的圆盘场地。</li>
+<li>捕获后的命名界面会读取实际收服的宝可梦，修复显示 LunatoneEx 和问号的问题。修复升级换招时的黑色头像，以及换招后已收服的对手贴图和血条重新出现的问题。</li>
+<li>修复 18 条损坏的进化记录及 39 个残留进化目标。更正火箭雀的旧毒属性数据和音波龙的升级招式表。</li>
+<li>修复投摔鬼等 7 个有野外遇敌记录但基础捕获率为 0 的内部条目。切尔诺贝利核电站分区 2 新增 Lv.26 铜镜怪，草丛／洞穴遇敌比例为 4%。</li>
+<li>未孵化的蛋会跳过战斗经验和努力值结算。培育屋按本作的百变怪编号识别亲本，修复部分异常孵蛋结果。</li>
+</ul>
+</section>
+
+<section class="guide-chapter" id="story-and-save" aria-labelledby="heading-story-and-save">
+<h2 id="heading-story-and-save">剧情与存档</h2>
+<ul class="guide-steps">
+<li>把可能覆盖电脑箱子和培育屋数据的剧情变量迁到独立存档区域。更新后读取旧存档时，会迁移原有的剧情变量。</li>
+<li>完成核电站调查后，从南口蓝色台阶的中央往下出门即可接上普里皮亚特镇的基格尔德过场。</li>
+</ul>
+<h3>用原存档继续游戏</h3>
+<ol class="guide-steps">
+<li>在旧版用游戏菜单保存，再从 Delta 的「管理存档」导出 .sav。</li>
+<li>导入新版 .gba，在新版游戏的「管理存档」里导入刚导出的 .sav。</li>
+<li>启动新版，从标题画面选择「继续」。</li>
+</ol>
+</section>
+</main>
+</body>
+</html>

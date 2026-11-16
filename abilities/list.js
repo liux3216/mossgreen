@@ -23,8 +23,8 @@ function createRows(ability){
 }
 function draw(){
  const query=search.value.trim().toLowerCase(),number=query.match(/^#?(\d+)$/);
- const visible=abilities.filter(a=>(!query||(number?a.id===Number(number[1]):[a.name,a.description,...a.pokemon.map(p=>p.name)].some(v=>v.toLowerCase().includes(query))))&&(!availability.value||(availability.value==='wild'?a.locations.length>0:a.locations.length===0)));
- visible.sort((a,b)=>{const av=a[sortKey],bv=b[sortKey];return (typeof av==='number'?av-bv:String(av).localeCompare(String(bv),'zh-Hans'))*direction||a.id-b.id;});
+ const visible=abilities.filter(a=>(!query||(number?a.id===Number(number[1]):[a.name,a.description,...a.pokemon.map(p=>p.name)].some(v=>wikiLanguage.matches(v, query))))&&(!availability.value||(availability.value==='wild'?a.locations.length>0:a.locations.length===0)));
+ visible.sort((a,b)=>{const av=a[sortKey],bv=b[sortKey];return (typeof av==='number'?av-bv:wikiLanguage.compare(av,bv))*direction||a.id-b.id;});
  const fragment=document.createDocumentFragment();for(const ability of visible)fragment.append(...createRows(ability));el('ability-rows').replaceChildren(fragment);
  el('abilities-status').textContent='显示 '+visible.length+' / '+abilities.length+' 个特性';el('abilities-empty').hidden=visible.length!==0;el('abilities-table-wrap').hidden=visible.length===0;
  for(const th of document.querySelectorAll('th[data-sort]')){th.setAttribute('aria-sort',th.dataset.sort===sortKey?(direction===1?'ascending':'descending'):'none');th.querySelector('.ability-sort').textContent=th.dataset.sort===sortKey?(direction===1?'↑':'↓'):'↕';}

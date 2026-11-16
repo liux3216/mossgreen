@@ -1,8 +1,8 @@
-function mapArt(id){
- const [src,w,h,land,water]=mapData[id];
+function mapArt(layout){
+ const [src,w,h,land,water]=layout;
  const box=elt('span'), img=elt('img');
  box.className='map-art';img.src=src.startsWith('locations/')?src:'data:image/webp;base64,'+src;
- img.alt='';img.loading='lazy';img.decoding='async';
+ img.alt='';img.loading='lazy';img.decoding='async';img.width=w*16;img.height=h*16;
  box.append(img);
  if(land.length||water.length){
   const ns='http://www.w3.org/2000/svg';
@@ -38,16 +38,16 @@ function terrainZoom(art,viewport,width){
  }
  return {controls,fit:()=>setZoom('fit')};
 }
-function preview(map,id){
- if(!mapData[id])return null;
+function preview(map,id,layout=mapData[id],variant=''){
+ if(!layout)return null;
  const b=elt('button');b.type='button';b.className='map-preview';
- b.setAttribute('aria-label','放大 '+map+' 地图');
- b.append(mapArt(id));
+ b.setAttribute('aria-label','放大 '+map+(variant?' '+variant:' 地图'));
+ b.append(mapArt(layout));
  b.addEventListener('click',()=>{
-  mapTitle.textContent=map+' · '+id;full.classList.remove('hidden-overlay');
-  const art=mapArt(id);art.querySelector('img').loading='eager';
+  mapTitle.textContent=map+' · '+(variant||id);full.classList.remove('hidden-overlay');
+  const art=mapArt(layout);art.querySelector('img').loading='eager';
   const viewport=elt('div');viewport.className='map-viewport';viewport.tabIndex=0;viewport.setAttribute('role','region');viewport.setAttribute('aria-label',map+' 地图，可滚动查看');viewport.append(art);full.replaceChildren(viewport);
-  const [,w,h,land,water]=mapData[id];
+  const [,w,h,land,water]=layout;
   const zoom=terrainZoom(art,viewport,w*16);
   legend.replaceChildren();
   if(land.length||water.length){

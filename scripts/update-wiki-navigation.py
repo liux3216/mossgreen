@@ -10,8 +10,12 @@ for path in root.rglob('*.html'):
   aside=match[0]
   if 'href="machines/"' not in aside:
    aside=re.sub(r'(<a href="moves/"[^>]*>招式一览</a>)',r'\1<a href="machines/">招式学习机</a>',aside,count=1)
+  if 'href="items/"' not in aside:
+   aside=re.sub(r'(<a href="abilities/"[^>]*>特性一览</a>)',r'\1<a href="items/">道具一览</a>',aside,count=1)
   if 'href="walkthrough/"' not in aside:
    aside=re.sub(r'(<a href="locations/atlas/"[^>]*>查看地图</a>)',r'\1<a href="walkthrough/">流程攻略</a>',aside,count=1)
+  if 'href="changelog/"' not in aside:
+   aside=re.sub(r'(<a href="walkthrough/"[^>]*>流程攻略</a>)',r'\1<a href="changelog/">修复与改进</a>',aside,count=1)
   return aside
  result=re.sub(r'<aside\b[^>]*class="wiki-sidebar"[\s\S]*?</aside>',update,text)
  if result!=text:path.write_text(result);count+=1

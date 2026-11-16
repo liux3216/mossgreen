@@ -7,7 +7,9 @@ root=Path(__file__).resolve().parent.parent
 rom=Path(sys.argv[1]).read_bytes();load_rom(rom)
 # Enumerate map groups from the ROM, then follow physical links from known places.
 from collections import defaultdict,Counter,deque
-excluded={'1/64','10/30'}
+# The original casino and prize room (10/14 and 10/15) have no usable entrance.
+# 1/3 is an unused Mushroom Mountain room. 17/3 aliases the active road 18/1.
+excluded={'1/3','1/64','10/14','10/15','10/30','17/3'}
 def valid(a):return 0x8000000<=a<0xa000000
 def text(a):
  out='';a&=0x1ffffff
@@ -28,7 +30,7 @@ for group in range(64):
   width,height=words(layout,2)
   if not(0<width<=256 and 0<height<=256):break
   key=f'{group}/{number}'
-  if key in excluded or group==0:continue # Legacy test/shop rooms are not public destinations.
+  if key in excluded or group==0:continue
   allmaps[key]={'hd':hd,'layout':layout,'size':[width,height],'section':raw(hd+20,1)[0],'kind':raw(hd+23,1)[0],'neighbors':set()}
 for key,p in allmaps.items():
  hd=p['hd'];events=words(hd+4)[0];count=raw(events+1,1)[0];ptr=words(events+8)[0]

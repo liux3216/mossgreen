@@ -1,0 +1,48 @@
+.wiki-language {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 2px;
+  margin-inline-start: auto;
+  padding: 2px;
+  border: 1px solid #b4cdca;
+  border-radius: 5px;
+  background: #f3f7f6;
+}
+
+.wiki-language button {
+  border: 0;
+  border-radius: 3px;
+  padding: 5px 9px;
+  min-height: 30px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  color: #35544f;
+  background: transparent;
+  cursor: pointer;
+}
+
+.wiki-language button[aria-pressed="true"] {
+  color: #125c53;
+  background: #dcece7;
+}
+
+.wiki-language button:hover { background: #e7f1ed; }
+
+.wiki-language button:focus-visible {
+  outline: 2px solid #1c665d;
+  outline-offset: 1px;
+}
+
+@media (max-width: 420px) {
+  .wiki-header:has(.wiki-language) { gap: 8px; }
+  .wiki-language button { padding-inline: 6px; }
+}
+
+:lang(en) .pokemon-detail-page .stat {
+  grid-template-columns: 68px 38px minmax(0, 1fr);
+}
+
+:lang(en) .pokemon-detail-page .basic-info > dl {
+  grid-template-columns: 92px minmax(0, 1fr);
+}

@@ -50,7 +50,9 @@ def metatile(t0,t1,index):
  return image
 
 def render_map(group,number):
- hd=header(group,number);layout=words(hd)[0]
+ return render_layout(words(header(group,number))[0])
+
+def render_layout(layout):
  width,height=words(layout,2);assert 0<width<=256 and 0<height<=256
  blocks,t0,t1=words(layout+12,3)
  image=Image.new('RGB',(width*16,height*16))

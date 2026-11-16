@@ -4,36 +4,52 @@
 <meta charset="utf-8">
 <base href="../">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="青苔 Wiki 宝可梦图鉴，按属性、名称或编号查找游戏内资料与捕捉地点。">
-<title>宝可梦图鉴 · 青苔 Wiki</title>
+<meta name="description" data-en-content="Browse the Mossgreen Pokédex by name, number, or type and find where to catch Pokémon." content="青苔 Wiki 宝可梦图鉴，按属性、名称或编号查找游戏内资料与捕捉地点。">
+<title data-en="Pokédex · Mossgreen Wiki">宝可梦图鉴 · 青苔 Wiki</title>
 <link rel="stylesheet" href="pokemon.css">
-<link rel="stylesheet" href="pokemons/list.css">
-<script src="pokemons/list.js?v=4aaea96a87f5" defer></script>
+<link rel="stylesheet" href="pokemons/list.css?v=6fcfa17c6cea">
+<link rel="stylesheet" href="wiki-language.css?v=325edd3d207c">
+<script src="wiki-language.js?v=7990eb3d3bb0" defer></script>
+<script src="pokemons/list.js?v=331be3b1c468" defer></script>
 </head>
-<body class="pokedex-page">
+<body class="pokedex-page" data-language-managed>
 <header class="wiki-header">
-<a class="wiki-brand" href="./"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 5h7l2 2 2-2h7v15h-7l-2 2-2-2H3zm2 2v11h6V9L9 7zm8 2v9h6V7h-4z"/></svg>宝可梦青苔 百科</a>
+<a class="wiki-brand" href="./"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 5h7l2 2 2-2h7v15h-7l-2 2-2-2H3zm2 2v11h6V9L9 7zm8 2v9h6V7h-4z"/></svg><span data-en="Mossgreen Wiki">口袋妖怪青苔 百科</span></a>
 </header>
-<aside class="wiki-sidebar" aria-label="百科导航">
-<p>宝可梦青苔 百科</p>
-<nav><a href="./">首页</a><a href="pokemons/" aria-current="page">宝可梦图鉴</a><a href="moves/">招式一览</a><a href="machines/">招式学习机</a><a href="abilities/">特性一览</a><a href="locations/">地点分布</a><a href="locations/atlas/">查看地图</a><a href="walkthrough/">流程攻略</a></nav>
+<aside class="wiki-sidebar" aria-label="百科导航" data-en-aria-label="Wiki navigation">
+<p data-en="Mossgreen Wiki">口袋妖怪青苔 百科</p>
+<nav><a href="./" data-en="Home">首页</a><a href="pokemons/" aria-current="page" data-en="Pokédex">宝可梦图鉴</a><a href="moves/" data-en="Moves">招式一览</a><a href="machines/" data-en="TMs and HMs">招式学习机</a><a href="abilities/" data-en="Abilities">特性一览</a><a href="items/" data-en="Items">道具一览</a><a href="locations/" data-en="Locations">地点分布</a><a href="locations/atlas/" data-en="Regional Map">查看地图</a><a href="walkthrough/" data-en="Walkthrough">流程攻略</a><a href="changelog/">修复与改进</a></nav>
 </aside>
 <main class="pokedex-main">
-<h1>宝可梦图鉴</h1>
-<nav class="breadcrumbs" aria-label="当前位置"><a href="./">百科首页</a><span>/</span><span aria-current="page">宝可梦图鉴</span></nav>
-<p class="page-intro">按游戏图鉴编号排序，同一编号集中展示；不同形态可展开查看。点击名称查看属性、种族值、特性与分布。</p>
-<section class="filter-panel" aria-label="筛选宝可梦">
-<div class="catalog-count"><strong id="entry-total">—</strong><span>个精灵条目 · 同编号形态合并展示</span></div>
+<h1 data-en="Pokédex">宝可梦图鉴</h1>
+<nav class="breadcrumbs" aria-label="当前位置" data-en-aria-label="Breadcrumb"><a href="./" data-en="Wiki Home">百科首页</a><span>/</span><span aria-current="page" data-en="Pokédex">宝可梦图鉴</span></nav>
+<p class="page-intro" data-en="Click a column header to sort or select a Pokémon to see its details. The default order follows the in-game Pokédex.">默认按游戏图鉴编号排列。点击表头可排序，点击宝可梦名称查看详情。</p>
+<section class="filter-panel" aria-label="筛选宝可梦" data-en-aria-label="Filter Pokémon">
+<div class="catalog-count"><strong id="entry-total">—</strong><span data-en="Pokémon entries · Forms grouped by Pokédex number">个精灵条目 · 同编号形态合并展示</span></div>
 <div class="filter-fields">
-<label class="name-filter" for="pokemon-search">查找宝可梦<input id="pokemon-search" type="search" placeholder="名称或编号" autocomplete="off"></label>
-<label for="pokemon-type">属性<select id="pokemon-type"><option value="">全部属性</option></select></label>
-<button id="reset-filters" type="button">重置筛选</button>
+<label class="name-filter" for="pokemon-search"><span data-en="Find Pokémon">查找宝可梦</span><input id="pokemon-search" type="search" placeholder="名称或编号" data-en-placeholder="Name or number" autocomplete="off"></label>
+<label for="pokemon-type"><span data-en="Type">属性</span><select id="pokemon-type"><option value="" data-en="All types">全部属性</option></select></label>
+<button id="reset-filters" type="button" data-en="Reset filters">重置筛选</button>
 </div>
 </section>
-<p id="list-status" class="list-status" role="status">正在加载宝可梦…</p>
-<div id="pokemon-grid"></div>
-<p id="list-empty" class="empty-state" hidden>没有找到对应的宝可梦，试试其他名字、编号或筛选条件。</p>
-<footer class="list-footer"><p>资料来自《口袋妖怪青苔》简单版 ROM。</p><p>收录本作宝可梦与不同形态。编号使用游戏实际图鉴编号，未分配编号的形态显示为「—」。</p></footer>
+<p id="list-status" class="list-status" role="status" data-en="Loading Pokémon…">正在加载宝可梦…</p>
+<div id="pokemon-grid" hidden>
+<div class="pokedex-table-wrap" tabindex="0" role="region" aria-label="宝可梦表格，可横向滚动" data-en-aria-label="Pokémon table, scrolls horizontally">
+<table class="pokedex-table">
+<thead><tr>
+<th scope="col" data-en="Sprite">图像</th>
+<th scope="col" aria-sort="ascending" data-en="National No.">全国编号</th>
+<th scope="col" data-sort="name"><button type="button" data-en="Pokémon">宝可梦</button></th>
+<th scope="col" data-sort="type"><button type="button" data-en="Type">属性</button></th>
+<th scope="col" data-sort="total"><button type="button" data-en="Base Stat Total">种族值总和</button></th>
+<th scope="col" data-sort="locations"><button type="button" title="按获取地点记录数排序" data-en-title="Sort by the number of encounter records" data-en="Encounter Locations">地图获取地点</button></th>
+</tr></thead>
+<tbody id="pokemon-rows"></tbody>
+</table>
+</div>
+</div>
+<p id="list-empty" class="empty-state" data-en="No Pokémon found. Try another name, number, or type." hidden>没有找到对应的宝可梦，试试其他名字、编号或筛选条件。</p>
+<footer class="list-footer"><p data-en="Data from the game’s ROM.">资料来自本作 ROM。</p><p data-en="This list includes Pokémon and their forms. Numbers follow the in-game Pokédex. Unnumbered forms display —.">收录本作宝可梦与不同形态。编号使用游戏实际图鉴编号，未分配编号的形态显示为「—」。</p></footer>
 </main>
 </body>
 </html>

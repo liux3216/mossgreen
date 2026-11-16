@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Build the machine catalog using the same sidebar and layout as the wiki."""
 from pathlib import Path
+from wiki_language import add_wiki_language
 import hashlib,re
 root=Path(__file__).resolve().parent.parent
 shell=(root/'index.html').read_text();shell=shell[shell.index('<header class="wiki-header">'):shell.index('<main class="pokedex-main')]
@@ -15,5 +16,5 @@ for kind,title in [('tm','TM 招式学习机'),('hm','HM 秘传学习机')]:
   parts.append('<th scope="col" data-sort="'+key+'" aria-sort="none"><button type="button">'+label+'<span class="machine-sort" aria-hidden="true">↕</span></button></th>')
  parts.append('<th scope="col">获取地点</th></tr></thead><tbody id="'+kind+'-rows"></tbody></table></div></section>')
 parts.append('<footer class="list-footer"><p>学习机编号、对应招式与可学习名单取自本作 ROM。不同形态按各自的可学习记录列出。</p><p>获取地点按地图事件整理，NPC 赠送和事件奖励可能需要先推进对应剧情。点击地点名称可查看地图；部分同名室内区域使用分区编号区分。</p></footer></main></body></html>')
-(root/'machines/index.html').write_text('\n'.join(parts))
+(root/'machines/index.html').write_text(add_wiki_language('\n'.join(parts)))
 print('Built machine catalog page')

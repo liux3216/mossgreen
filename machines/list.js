@@ -62,10 +62,10 @@ function rows(machine) {
 function draw() {
   const query = search.value.trim().toLowerCase(), number = /^#?\d+$/.test(query) ? Number(query.replace('#', '')) : null;
   const filtered = machines.filter(m => (!kind.value || m.kind === kind.value) && (!type.value || m.type === type.value) && (!category.value || m.category === category.value) &&
-    (!query || (number !== null ? m.number === number : m.id.toLowerCase().includes(query.replace(/\s+/g, '')) || m.name.toLowerCase().includes(query) || m.learners.some(id => pokemon[id]?.name.toLowerCase().includes(query)))));
+    (!query || (number !== null ? m.number === number : m.id.toLowerCase().includes(query.replace(/\s+/g, '')) || wikiLanguage.matches(m.name, query) || m.learners.some(id => wikiLanguage.matches(pokemon[id]?.name, query)))));
   filtered.sort((a, b) => {
     const av = sortKey === 'learners' ? a.learners.length : a[sortKey], bv = sortKey === 'learners' ? b.learners.length : b[sortKey];
-    return (typeof av === 'number' ? av - bv : String(av).localeCompare(String(bv), 'zh-Hans')) * direction || a.number - b.number;
+    return (typeof av === 'number' ? av - bv : wikiLanguage.compare(av, bv)) * direction || a.number - b.number;
   });
   for (const value of ['TM', 'HM']) {
     const entries = filtered.filter(m => m.kind === value), body = el(value.toLowerCase() + '-rows'), fragment = document.createDocumentFragment();

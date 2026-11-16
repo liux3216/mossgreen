@@ -38,6 +38,14 @@
 .pokedex-table th:last-child,.pokedex-table td:last-child{border-right:0}
 .pokedex-table tr:last-child td{border-bottom:0}
 .pokedex-table th{font-size:12px;font-weight:700;background:#f0f6f3;color:#273e38;text-align:center;white-space:nowrap}
+#pokemon-grid th[data-sort]{padding:0}
+#pokemon-grid th[data-sort] button{display:inline-flex;align-items:center;justify-content:center;gap:4px;width:100%;padding:9px 4px;border:0;background:none;color:inherit;font:inherit;cursor:pointer}
+#pokemon-grid th[data-sort] button:hover{background:#e2eeeb}
+#pokemon-grid th[data-sort] button:focus-visible{outline:2px solid var(--teal);outline-offset:-3px}
+#pokemon-grid th[data-sort] button::after{content:"↕"/"";color:#607571}
+#pokemon-grid th[data-sort][aria-sort] button{color:var(--teal);background:#dcece7}
+#pokemon-grid th[data-sort][aria-sort="ascending"] button::after{content:"↑"/"";color:inherit}
+#pokemon-grid th[data-sort][aria-sort="descending"] button::after{content:"↓"/"";color:inherit}
 .pokedex-table tr:nth-child(even){background:#f4f8f6}
 .pokedex-table tr:hover{background:#eaf3ef}
 .pokedex-table th:nth-child(1){width:56px}
@@ -74,3 +82,5 @@
 @media(max-width:760px){.pokemon-detail-page .identity h1{font-size:28px}}
 
 .catalog-forms{margin-top:4px;font-size:12px;color:#627974}.catalog-forms summary{cursor:pointer}.catalog-forms a{display:block;margin-top:4px}
+
+:lang(en) .pokedex-table th:nth-child(5){width:122px}

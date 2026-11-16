@@ -1,22 +1,24 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>首页 · 青苔 Wiki</title><meta name="description" content="了解口袋妖怪青苔的卧底警察剧情、原创地区与游戏特色，查阅宝可梦资料和野外遇敌分布。">
-<link rel="stylesheet" href="pokemon.css"><link rel="stylesheet" href="pokemons/list.css"><link rel="stylesheet" href="home.css"><script>
+<link rel="stylesheet" href="pokemon.css"><link rel="stylesheet" href="pokemons/list.css?v=6fcfa17c6cea"><link rel="stylesheet" href="home.css"><script>
 const oldLocation=location.hash.match(/^#location-(\d+-\d+(?:-config-\d+)?)$/);
-if(oldLocation)location.replace('locations/'+oldLocation[1]+'/');
-else if(location.hash==='#atlas-nav')location.replace('locations/atlas/');
-</script></head>
+if(oldLocation)location.replace('locations/'+oldLocation[1]+'/'+location.search);
+else if(location.hash==='#atlas-nav')location.replace('locations/atlas/'+location.search);
+</script><link rel="stylesheet" href="wiki-language.css?v=325edd3d207c">
+<script src="wiki-language.js?v=7990eb3d3bb0" defer></script>
+</head>
 <body class="pokedex-page home-page"><header class="wiki-header">
-<a class="wiki-brand" href="./"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 5h7l2 2 2-2h7v15h-7l-2 2-2-2H3zm2 2v11h6V9L9 7zm8 2v9h6V7h-4z"/></svg>宝可梦青苔 百科</a>
+<a class="wiki-brand" href="./"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 5h7l2 2 2-2h7v15h-7l-2 2-2-2H3zm2 2v11h6V9L9 7zm8 2v9h6V7h-4z"/></svg>口袋妖怪青苔 百科</a>
 </header>
 <aside class="wiki-sidebar" aria-label="百科导航">
-<p>宝可梦青苔 百科</p>
-<nav><a href="./" aria-current="page">首页</a><a href="pokemons/">宝可梦图鉴</a><a href="moves/">招式一览</a><a href="machines/">招式学习机</a><a href="abilities/">特性一览</a><a href="locations/">地点分布</a><a href="locations/atlas/">查看地图</a><a href="walkthrough/">流程攻略</a></nav>
+<p>口袋妖怪青苔 百科</p>
+<nav><a href="./" aria-current="page">首页</a><a href="pokemons/">宝可梦图鉴</a><a href="moves/">招式一览</a><a href="machines/">招式学习机</a><a href="abilities/">特性一览</a><a href="items/">道具一览</a><a href="locations/">地点分布</a><a href="locations/atlas/">查看地图</a><a href="walkthrough/">流程攻略</a><a href="changelog/">修复与改进</a></nav>
 </aside>
 
 <main class="pokedex-main home-main"><h1>口袋妖怪青苔</h1>
 <nav class="breadcrumbs" aria-label="当前位置"><span aria-current="page">百科首页</span></nav>
-<p class="home-subtitle">Pokémon Verde Musgo · 汉化简单版</p>
+<p class="home-subtitle">Pokémon Verde Musgo</p>
 <section aria-labelledby="intro"><h2 id="intro">游戏简介</h2>
 <p>《口袋妖怪青苔》（Pokémon Verde Musgo）是由 ABJOPE Team 制作的 GBA 宝可梦改版，带来原创剧情、地区与地图。</p>
 <p>这次，你将以训练家的身份展开一场卧底调查：作为一名伪装成训练家的警察，穿行于 RURORO 与 URARA 两片大陆，在收集宝可梦、挑战强敌的旅途中追查犯罪组织。</p>

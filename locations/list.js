@@ -5,8 +5,8 @@ let locations=[],sortKey=null,direction=1;
 function node(tag,text){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;}
 function draw(){
  const words=search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
- const visible=locations.filter(place=>words.every(word=>[place.name,place.foreign,place.mapId,...place.pokemon.flatMap(p=>[p.name,String(p.id)])].join(' ').toLowerCase().includes(word))&&(!method.value||place.methods.includes(method.value)));
- if(sortKey)visible.sort((a,b)=>{const result=sortKey==='count'?a.pokemon.length-b.pokemon.length:a.name.localeCompare(b.name,'zh-Hans');return result*direction;});
+ const visible=locations.filter(place=>words.every(word=>[place.name,place.foreign,place.mapId,...place.pokemon.flatMap(p=>[p.name,String(p.id)])].some(value=>wikiLanguage.matches(value,word)))&&(!method.value||place.methods.includes(method.value)));
+ if(sortKey)visible.sort((a,b)=>{const result=sortKey==='count'?a.pokemon.length-b.pokemon.length:wikiLanguage.compare(a.name,b.name);return result*direction;});
  const fragment=document.createDocumentFragment();
  for(const place of visible){const row=node('tr'),name=node('td'),link=node('a',place.name);link.href='locations/'+place.anchor.replace(/^location-/,'')+'/';const id=node('small',place.mapId);id.className='location-id';name.append(link,id);const methods=node('td'),badges=node('div');badges.className='location-methods';for(const kind of place.methods)badges.append(node('span',kind));methods.append(badges);row.append(name,methods,node('td',String(place.pokemon.length)));fragment.append(row);}
  el('location-rows').replaceChildren(fragment);el('locations-status').textContent='显示 '+visible.length+' / '+locations.length+' 个地点';el('locations-empty').hidden=visible.length!==0;el('locations-table-wrap').hidden=visible.length===0;

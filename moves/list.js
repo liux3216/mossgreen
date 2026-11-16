@@ -45,8 +45,8 @@ function createRows(move){
 }
 function draw(){
  const query=search.value.trim().toLowerCase();const idQuery=query.match(/^#?(\d+)$/);
- const filtered=moves.filter(m=>(!query||(idQuery?m.aliases.includes(Number(idQuery[1])):m.name.toLowerCase().includes(query)))&&(!type.value||(m.dataAvailable&&m.type===type.value))&&(!category.value||(m.dataAvailable&&m.category===category.value)));
- filtered.sort((a,b)=>{const av=a[sortKey],bv=b[sortKey];const n=typeof av==='number'?av-bv:String(av).localeCompare(String(bv),'zh-Hans');return n*direction||a.id-b.id;});
+ const filtered=moves.filter(m=>(!query||(idQuery?m.aliases.includes(Number(idQuery[1])):wikiLanguage.matches(m.name, query)))&&(!type.value||(m.dataAvailable&&m.type===type.value))&&(!category.value||(m.dataAvailable&&m.category===category.value)));
+ filtered.sort((a,b)=>{const av=a[sortKey],bv=b[sortKey];const n=typeof av==='number'?av-bv:wikiLanguage.compare(av,bv);return n*direction||a.id-b.id;});
  const fragment=document.createDocumentFragment();for(const move of filtered)fragment.append(...createRows(move));byId('move-rows').replaceChildren(fragment);
  byId('moves-status').textContent='显示 '+filtered.length+' / '+moves.length+' 个招式';byId('moves-empty').hidden=filtered.length!==0;byId('moves-table-wrap').hidden=filtered.length===0;
  for(const th of document.querySelectorAll('th[data-sort]')){th.setAttribute('aria-sort',th.dataset.sort===sortKey?(direction===1?'ascending':'descending'):'none');th.querySelector('.sort-indicator').textContent=th.dataset.sort===sortKey?(direction===1?'↑':'↓'):'↕';}
