@@ -43,7 +43,9 @@ for place in locations_to_build:
  base_name=place['name'].split('（')[0]
  related=[{'name':p['name'],'path':'locations/'+p['anchor'].removeprefix('location-')+'/'} for p in locations if p['anchor']!=place['anchor'] and p['name'].split('（')[0]==base_name]
  specials=[{**entry,'pokemonName':pokemon[str(entry['pokemonId'])]['name'],'sprite':pokemon[str(entry['pokemonId'])]['sprite']} for entry in special.get(place['mapId'],[])]
- detail={**place,'methods':methods,'map':map_value,'atlas':atlas.get(place['mapId']),'related':related,'connections':connections[place['mapId']],'specialAcquisitions':specials}
+ # The directory keeps the foreign search aliases.
+ detail={k:v for k,v in place.items() if k!='foreign'}
+ detail.update(methods=methods,map=map_value,atlas=atlas.get(place['mapId']),related=related,connections=connections[place['mapId']],specialAcquisitions=specials)
  if place['mapId']=='1/87':
   detail['waterMap']=json.loads((root/'data/cemetery-water-layout.json').read_text())
  data=root/'locations/data';data.mkdir(exist_ok=True)

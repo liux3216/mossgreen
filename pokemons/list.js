@@ -67,7 +67,7 @@ function searchKey(value) {
 const sortValues = {
   name: pokemonName,
   type: record => verified(record) && record.types.length ? record.types.map(typeName).join(' ') : null,
-  total: record => record.statTotal,
+  total: record => statForm(record).statTotal,
   locations: record => record.locations.length,
 };
 let sortKey = '';
@@ -81,6 +81,16 @@ function element(tag, text) {
 }
 function verified(record) {
   return Object.values(record.stats).every(value => value > 0);
+}
+function statForm(record) {
+  if (sortKey !== 'total') return record;
+  return (direction === 1 ? record.lowestStatForm : record.highestStatForm) ?? record;
+}
+function formLabel(record, form) {
+  const name = pokemonName(form);
+  if (name !== pokemonName(record)) return name;
+  const number = record.otherForms.indexOf(form) + 2;
+  return name + text(` · 形态 ${number}`, ` · Form ${number}`);
 }
 function createRow(record) {
   const row = element('tr');
@@ -112,13 +122,11 @@ function createRow(record) {
     forms.className = 'catalog-forms';
     const count = record.otherForms.length;
     forms.append(element('summary', text(`其他 ${count} 个形态`, `${count} other ${count === 1 ? 'form' : 'forms'}`)));
-    record.otherForms.forEach((form, index) => {
-      const formName = pokemonName(form);
-      const label = formName === displayName ? formName + text(` · 形态 ${index + 2}`, ` · Form ${index + 2}`) : formName;
-      const link = element('a', label);
+    for (const form of record.otherForms) {
+      const link = element('a', formLabel(record, form));
       link.href = 'pokemons/' + form.id + '/';
       forms.append(link);
-    });
+    }
     nameCell.append(forms);
   }
   const typeCell = element('td');
@@ -148,15 +156,24 @@ function createRow(record) {
     more.href = 'pokemons/' + record.id + '/#encounters-heading';
     locations.append(more);
   }
-  row.append(imageCell, number, nameCell, typeCell, element('td', String(record.statTotal ?? '—')), locations);
+  const rankedForm = statForm(record);
+  const stats = element('td', String(rankedForm.statTotal ?? '—'));
+  if (rankedForm.id !== record.id) {
+    const link = element('a', formLabel(record, rankedForm));
+    link.href = 'pokemons/' + rankedForm.id + '/';
+    link.className = 'stat-form';
+    stats.append(link);
+  }
+  row.append(imageCell, number, nameCell, typeCell, stats, locations);
   return row;
 }
 function show(pokemon) {
   const query = searchKey(search.value.trim());
   const numberQuery = query.replace(/^#/, '');
+  const matchesQuery = form => form.searchNames.some(name => name.includes(query)) ||
+    [form.gameDexId, form.romDexId].some(number => number && String(number).padStart(4, '0').includes(numberQuery));
   const visible = pokemon.filter(record =>
-    ([record, ...record.otherForms].some(form => form.searchNames.some(name => name.includes(query))) ||
-      (record.gameDexId && String(record.gameDexId).padStart(4, '0').includes(numberQuery))) &&
+    [record, ...record.otherForms].some(matchesQuery) &&
     (!typeFilter.value || [record, ...record.otherForms].some(form => verified(form) && form.types.includes(typeFilter.value)))
   );
   if (sortKey) {
@@ -197,15 +214,27 @@ async function load() {
     for (const record of Object.values(data)) {
       const englishName = translations?.pokemon[record.name];
       record.searchNames = (englishName ? [record.name, englishName] : [record.name]).map(searchKey);
+      record.statTotal = verified(record) ? Object.values(record.stats).reduce((sum, value) => sum + value, 0) : null;
     }
     const pokemon = Object.values(data)
       .filter(record => !record.catalogHidden && record.id === record.canonicalId && record.id === record.catalogPrimaryId)
-      .map(record => ({
-        ...record,
-        otherForms: record.formIds.filter(id => id !== record.id).map(id => data[id]),
-        statTotal: verified(record) ? Object.values(record.stats).reduce((sum, value) => sum + value, 0) : null,
-        locations: [...new Map(record.locations.map(place => [place.anchor + ':' + place.method, place])).values()],
-      }))
+      .map(record => {
+        const otherForms = record.formIds.filter(id => id !== record.id).map(id => data[id]);
+        let lowestStatForm = null;
+        let highestStatForm = null;
+        for (const form of [record, ...otherForms]) {
+          if (form.statTotal === null) continue;
+          if (!lowestStatForm || form.statTotal < lowestStatForm.statTotal) lowestStatForm = form;
+          if (!highestStatForm || form.statTotal > highestStatForm.statTotal) highestStatForm = form;
+        }
+        return {
+          ...record,
+          otherForms,
+          lowestStatForm,
+          highestStatForm,
+          locations: [...new Map(record.locations.map(place => [place.anchor + ':' + place.method, place])).values()],
+        };
+      })
       .sort((a, b) => (a.gameDexId || Infinity) - (b.gameDexId || Infinity) || a.id - b.id);
     document.getElementById('entry-total').textContent = pokemon.length;
     const types = [...new Set(pokemon.filter(verified).flatMap(record => record.types))];

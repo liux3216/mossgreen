@@ -7,6 +7,7 @@ root=Path(__file__).resolve().parent.parent
 data=json.loads((root/'data/walkthrough.json').read_text())
 places={}
 for place in json.loads((root/'data/atlas.json').read_text()):places.setdefault(place['mapId'],place)
+map_names=data.get('mapNames',{})
 def esc(value):return html.escape(str(value),quote=True)
 shell=(root/'index.html').read_text();shell=shell[shell.index('<header class="wiki-header">'):shell.index('<main class="pokedex-main')]
 shell=re.sub(r' aria-current="(?:page|location)"','',shell)
@@ -14,7 +15,7 @@ shell=shell.replace('<a href="walkthrough/">','<a href="walkthrough/" aria-curre
 styles=[]
 for asset in ['pokemon.css','pokemons/list.css','walkthrough/style.css']:
  digest=hashlib.sha256((root/asset).read_bytes()).hexdigest()[:12];styles.append('<link rel="stylesheet" href="'+asset+'?v='+digest+'">')
-parts=['<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1"><title>流程攻略 · 青苔 Wiki</title><meta name="description" content="口袋妖怪青苔中文流程攻略：第一大陆、第二大陆、八把钥匙、通关后剧情与支线任务。">'+''.join(styles)+'</head><body class="pokedex-page walkthrough-page">'+shell+'<main class="pokedex-main walkthrough-main"><h1>流程攻略</h1><nav class="breadcrumbs" aria-label="当前位置"><a href="./">百科首页</a><span>/</span><span aria-current="page">流程攻略</span></nav><p class="page-intro guide-intro">按剧情顺序整理主线、徽章与通关后任务。点击目录跳转章节，点击地点标签查看对应地图。</p><p class="guide-source">中文整理自 <a href="'+esc(data['source']['url'])+'" target="_blank" rel="noopener noreferrer">Almanaque Pokémon Verde Musgo</a>。地名优先对应本作汉化地图；未能确认的人名、译名或原文图片位置会在相关步骤注明。</p><nav id="contents" class="guide-toc" aria-labelledby="contents-heading"><h2 id="contents-heading">攻略目录</h2><ol>']
+parts=['<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1"><title>流程攻略 · 青苔 Wiki</title><meta name="description" content="口袋妖怪青苔中文流程攻略：第一大陆、第二大陆、八把钥匙、通关后剧情与支线任务。">'+''.join(styles)+'</head><body class="pokedex-page walkthrough-page">'+shell+'<main class="pokedex-main walkthrough-main"><h1>流程攻略</h1><nav class="breadcrumbs" aria-label="当前位置"><a href="./">百科首页</a><span>/</span><span aria-current="page">流程攻略</span></nav><p class="page-intro guide-intro">按剧情顺序整理主线、徽章与通关后任务。点击目录跳转章节，点击地点标签查看对应地图。</p><p class="guide-source">中文整理自 <a href="'+esc(data['source']['url'])+'" target="_blank" rel="noopener noreferrer">Almanaque Pokémon Verde Musgo</a>。人名、地名和道具名参照游戏内的汉化。角色在不同剧情中有不同译名时，会在相关步骤注明。</p><nav id="contents" class="guide-toc" aria-labelledby="contents-heading"><h2 id="contents-heading">攻略目录</h2><ol>']
 ids=set()
 for section in data['sections']:
  assert section['id'] not in ids;ids.add(section['id'])
@@ -32,7 +33,7 @@ for section in data['sections']:
    parts.append('<nav class="guide-places" aria-label="'+esc(stage['title'])+'相关地图"><span>相关地图</span>')
    for map_id in dict.fromkeys(stage['places']):
     assert map_id in places,map_id;p=places[map_id]
-    parts.append('<a href="'+esc(p['path'])+'">'+esc(p['name'])+'</a>')
+    parts.append('<a href="'+esc(p['path'])+'">'+esc(map_names.get(map_id,p['name']))+'</a>')
    parts.append('</nav>')
   parts.append('</section>')
  parts.append('<p class="guide-back"><a href="walkthrough/#contents">返回攻略目录 ↑</a></p></section>')

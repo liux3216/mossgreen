@@ -19,9 +19,8 @@
   "canonicalAliases": {
     "776": 1096
   },
-  "unavailableEncounterMaps": {
-    "116": [
-      "1/87"
-    ]
+  "formParents": {
+    "1126": 160,
+    "1121": 251
   }
 }

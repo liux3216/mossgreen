@@ -11,6 +11,8 @@ data = json.loads(path.read_text())
 overrides = json.loads((root / 'data/pokemon-catalog-overrides.json').read_text())
 # Verified duplicates can share an entry even if the ROM assigns two dex numbers.
 canonical_aliases = overrides.pop('canonicalAliases', {})
+# A distinct named form can have its own ROM dex number and still share a catalog entry.
+form_parents = overrides.pop('formParents', {})
 # Keep the raw slots for reference while omitting tested unavailable maps
 # from the player-facing species list.
 unavailable_encounter_maps = overrides.pop('unavailableEncounterMaps', {})
@@ -22,6 +24,8 @@ QUESTION_MARK_ICON = '00d4d1907375eb9cd6ef9ad119a99df21be61d98cbeaf3f51364124da0
 QUESTION_MARK_SPRITE = '6a212ff718e3e2c879d5230d7da3b922ef965bdd15a1b8a0b332430d92ed4d0f'
 for record in slots:
     record.setdefault('sourceLocations', record['locations'])
+    if 'romDexId' in record:
+        record['gameDexId'] = record.pop('romDexId')
     for key in ('catalogStatus', 'catalogLabel', 'catalogNote', 'relatedIds'):
         record.pop(key, None)
     record['catalogHidden'] = not any(record['stats'].values()) and record['name'] != '未知图腾'
@@ -75,7 +79,11 @@ for records in duplicate_groups.values():
 numbered = [record for record in canonical if record['gameDexId']]
 groups = defaultdict(list)
 for record in canonical:
-    group = 'dex-' + str(record['gameDexId']) if record['gameDexId'] else None
+    parent_id = form_parents.get(str(record['id']))
+    parent = data[str(parent_id)] if parent_id is not None else record
+    if parent_id is not None:
+        assert not parent['catalogHidden'] and parent['canonicalId'] == parent_id and parent['gameDexId'], parent_id
+    group = 'dex-' + str(parent['gameDexId']) if parent['gameDexId'] else None
     if not group:
         candidates = [parent for parent in numbered if parent['name'] == record['name'] or (
             record['nationalId'] and record['nationalId'] == parent['nationalId']
@@ -83,12 +91,18 @@ for record in canonical:
         group = 'dex-' + str(candidates[0]['gameDexId']) if candidates else 'species-' + str(record['id'])
     groups[group].append(record)
 for group, records in groups.items():
-    records.sort(key=lambda record: (record['gameDexId'] is None, record['id']))
+    records.sort(key=lambda record: (str(record['id']) in form_parents, record['gameDexId'] is None, record['id']))
     form_ids = [record['id'] for record in records]
     for record in records:
         record['catalogGroup'] = group
         record['catalogPrimaryId'] = records[0]['id']
         record['formIds'] = form_ids
+        parent_id = form_parents.get(str(record['id']))
+        if parent_id is not None:
+            display_number = data[str(parent_id)]['gameDexId']
+            if record['gameDexId'] != display_number:
+                record['romDexId'] = record['gameDexId']
+                record['gameDexId'] = display_number
 for record in slots:
     if not record['catalogHidden'] and record['canonicalId'] != record['id']:
         primary = data[str(record['canonicalId'])]
